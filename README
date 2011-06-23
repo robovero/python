@@ -1,0 +1,14 @@
+This is Python Client Library for RoboVero.
+
+Contents
+========
+./arduino.py	Arduino compatibility layer
+./extras.py	Python wrappers for non-driver c functions
+./internals.py	Implements core client library functionality
+./launcher.py	A short script for launching RoboVero examples
+./examples/	Client library usage examples
+./drivers/	Python wrappers for driver functions 		
+
+Getting Started
+===============
+Connect the RoboVero USB and apply power. Run launcher.py from the root directory. Select an example from the list to run.
