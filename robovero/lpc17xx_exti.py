@@ -1,7 +1,14 @@
-"""External interrupt client library functions. See LPC17xx 
-CMSIS-Compliant Standard Peripheral Firmware Driver Library
-documentation."""
+"""External interrupt client library functions. See LPC17xx CMSIS-Compliant
+Standard Peripheral Firmware Driver Library documentation.
+"""
+
 from internals import robocaller, cstruct
+
+__author__ =			"Neil MacMunn"
+__email__ =				"neil@gumstix.com"
+__copyright__ = 	"Copyright 2010, Gumstix Inc"
+__license__ = 		"BSD 2-Clause"
+__version__ =			"0.1"
 
 EXTI_EINT0_BIT_MARK = 0x01
 EXTI_EINT1_BIT_MARK = 0x02

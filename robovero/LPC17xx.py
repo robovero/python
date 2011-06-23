@@ -4,6 +4,12 @@ Firmware Driver Library documentation.
 
 from internals import robocaller, cstruct
 
+__author__ =			"Neil MacMunn"
+__email__ =				"neil@gumstix.com"
+__copyright__ = 	"Copyright 2010, Gumstix Inc"
+__license__ = 		"BSD 2-Clause"
+__version__ =			"0.1"
+
 LPC_AHBRAM0_BASE = (0x2007C000)
 LPC_AHBRAM1_BASE = (0x20080000)
 LPC_GPIO_BASE = (0x2009C000)

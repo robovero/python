@@ -1,7 +1,14 @@
-"""Motor control PWM client library functions. See LPC17xx 
-CMSIS-Compliant Standard Peripheral Firmware Driver Library 
-documentation."""
+"""Motor control PWM client library functions. See LPC17xx CMSIS-Compliant
+Standard Peripheral Firmware Driver Library documentation.
+"""
+
 from internals import robocaller, cstruct
+
+__author__ =			"Neil MacMunn"
+__email__ =				"neil@gumstix.com"
+__copyright__ = 	"Copyright 2010, Gumstix Inc"
+__license__ = 		"BSD 2-Clause"
+__version__ =			"0.1"
 
 MCPWM_CHANNEL_EDGE_MODE = ((0))
 MCPWM_CHANNEL_CENTER_MODE = ((1))

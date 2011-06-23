@@ -1,6 +1,14 @@
-"""I2S client library functions. See LPC17xx CMSIS-Compliant
-Standard Peripheral Firmware Driver Library documentation."""
+"""I2S client library functions. See LPC17xx CMSIS-Compliant Standard Peripheral
+Firmware Driver Library documentation.
+"""
+
 from internals import robocaller, cstruct
+
+__author__ =			"Neil MacMunn"
+__email__ =				"neil@gumstix.com"
+__copyright__ = 	"Copyright 2010, Gumstix Inc"
+__license__ = 		"BSD 2-Clause"
+__version__ =			"0.1"
 
 I2S_WORDWIDTH_8 = ((0))
 I2S_WORDWIDTH_16 = ((1))

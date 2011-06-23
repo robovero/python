@@ -1,6 +1,14 @@
 """Ethernet MAC client library functions. See LPC17xx CMSIS-Compliant 
-Standard Peripheral Firmware Driver Library documentation."""
+Standard Peripheral Firmware Driver Library documentation.
+"""
+
 from internals import robocaller, cstruct
+
+__author__ =			"Neil MacMunn"
+__email__ =				"neil@gumstix.com"
+__copyright__ = 	"Copyright 2010, Gumstix Inc"
+__license__ = 		"BSD 2-Clause"
+__version__ =			"0.1"
 
 EMAC_PHY_STAT_LINK = (0)
 EMAC_PHY_STAT_SPEED = (1)		
