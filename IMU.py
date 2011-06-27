@@ -2,7 +2,8 @@
 """
 
 from robovero.extras import Array, roboveroConfig
-from robovero.lpc17xx_i2c import *
+from robovero.lpc17xx_i2c import I2C_M_SETUP_Type, I2C_MasterTransferData, \
+														I2C_TRANSFER_OPT_Type
 from robovero.lpc17xx_gpio import GPIO_ReadValue
 from robovero.LPC17xx import LPC_I2C0
 from robovero.lpc_types import Status
@@ -61,7 +62,7 @@ class I2CDevice(object):
 		ret = I2C_MasterTransferData(LPC_I2C0, self.config.ptr,
 																	I2C_TRANSFER_OPT_Type.I2C_TRANSFER_POLLING)
 		if ret == Status.ERROR:
-			return -1		
+			exit("I2C Read Error")		
 		return self.rx_data[0]
 		
 	def writeReg(self, register, value):
@@ -73,9 +74,10 @@ class I2CDevice(object):
 		ret = I2C_MasterTransferData(LPC_I2C0, self.config.ptr,
 																	I2C_TRANSFER_OPT_Type.I2C_TRANSFER_POLLING)
 		if ret == Status.ERROR:
-			return -1
+			exit("I2C Write Error")
 		if self.readReg(register) != value:
-			return -1
+			exit("I2C Verification Error")
+		return None
 
 # Initialize pin select registers
 roboveroConfig()
@@ -89,13 +91,10 @@ compass = I2CDevice(0x1E)
 compass.writeReg(compass_mr_reg, 0)	# continuous measurement mode
 
 # configure the gyro
-gyro = I2CDevice(0x6A)
-
-#gyro.writeReg(gyro_ctrl_reg2, )
+# see L3G4200D Application Note for initialization procedure
+gyro = I2CDevice(0x68)
 gyro.writeReg(gyro_ctrl_reg3, 0x08) # enable DRDY
 gyro.writeReg(gyro_ctrl_reg4, 0x80) # enable block data read mode
-#gyro.writeReg(gyro_ctrl_reg6, )
-#gyro.writeReg(gyro_ctrl_reg5, 0x13) # enable HPF and LPF 
 gyro.writeReg(gyro_ctrl_reg1, 0x09)	# normal mode, enable x-axis
 
 def twosComplement(low_byte, high_byte):
