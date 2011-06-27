@@ -5,7 +5,7 @@ from robovero.extras import Array, roboveroConfig
 from robovero.lpc17xx_i2c import *
 from robovero.lpc17xx_gpio import GPIO_ReadValue
 from robovero.LPC17xx import LPC_I2C0
-from robovero.lpc_types import FunctionalState, Status, Bool
+from robovero.lpc_types import Status
 import time
 
 __author__ =			"Neil MacMunn"

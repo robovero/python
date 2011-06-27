@@ -1,7 +1,8 @@
 """Send some data on CAN bus.
 """
 
-from robovero.lpc17xx_can import *
+from robovero.lpc17xx_can import CAN_MSG_Type, CAN_SetAFMode, CAN_AFMODE_Type, \
+							CAN_ReceiveMsg, CAN_Init
 from robovero.LPC17xx import LPC_CAN1, LPC_CANAF
 from robovero.extras import Array, roboveroConfig
 import time
