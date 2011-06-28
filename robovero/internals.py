@@ -83,7 +83,7 @@ def robocaller(function, ret_type, *args):
 			ret = getReturn()
 			robovero.debug.write("RESPONSE: %s" % ret)
 			if " " in ret:
-				ret = [int(x) for x in ret.split()]
+				ret = [int(x, 16) for x in ret.split()]
 			else:
 				ret = int(ret, 16)
 			return ret
