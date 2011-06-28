@@ -11,4 +11,6 @@ Contents
 
 Getting Started
 ===============
-Connect the RoboVero USB and apply power. Run launcher.py from the root directory. Select an example from the list to run.
+Connect the RoboVero USB and apply power. Run one of the examples in the project root directory. For example,
+
+ $ python gpio.py
