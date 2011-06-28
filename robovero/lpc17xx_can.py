@@ -338,7 +338,7 @@ class SFF_Entry(cstruct):
 	pass
 
 class CAN_MSG_Type(cstruct):
-	pass
+	pass		
 
 class CAN_ERROR:
 	CAN_OK = 1
