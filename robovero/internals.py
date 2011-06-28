@@ -1,7 +1,7 @@
 """Handles communications with the RoboVero.
 """
 
-import threading, serial, time, atexit
+import threading, serial, time, atexit, os
 
 __author__ =			"Neil MacMunn"
 __email__ =				"neil@gumstix.com"
@@ -71,13 +71,21 @@ def robocaller(function, ret_type, *args):
 	global robovero
 	with robovero.lock:
 		for arg in args:
-			function += " %X" % (arg)
+			if type(arg) == list:
+				for sub_arg in arg:
+					function += " %X" % (sub_arg)
+			else:
+				function += " %X" % (arg)
 		function += "\r\n"
 		robovero.debug.write("REQUEST: %s" % function)
 		robovero.serial.write(function)
-		if ret_type != "void":	
-			ret = int(getReturn(), 16)
-			robovero.debug.write("RESPONSE: %X\r\n" % ret)
+		if ret_type != "void":
+			ret = getReturn()
+			robovero.debug.write("RESPONSE: %s" % ret)
+			if " " in ret:
+				ret = [int(x) for x in ret.split()]
+			else:
+				ret = int(ret, 16)
 			return ret
 		else:
 			return None
@@ -158,7 +166,33 @@ class Robovero(object):
 	def __init__(self):
 		"""Open a serial connection to the robovero hardware.
 		"""
-		self.serial = serial.Serial('/dev/ttyACM0')
+		
+		# look for RoboVeros in /dev
+		devices = [dev for dev in os.listdir("/dev/") if "ttyACM" in dev]
+		devices.sort()
+		num_devs = len(devices)
+		idx = 0
+		
+		# determine which device to connect to
+		if num_devs == 0:
+			exit("No RoboVero hardware found.")
+		elif num_devs > 1:
+			for dev in devices:
+				print "%d) %s" % (idx, devices[idx])
+				idx += 1
+			try:
+				idx = int(raw_input("\r\nwhich device? "))
+				if idx >= num_devs:
+					raise ValueError
+			except:
+				exit("Invalid selection")
+
+		# try to connect
+		try:
+			self.serial = serial.Serial('/dev/%s' % devices[idx])
+		except:
+			exit("Couldn't open device.")
+			
 		self.serial.timeout = 0
 		# send line terminator, disable console echo and prompt
 		self.serial.write("\r\n")
