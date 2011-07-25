@@ -9,33 +9,21 @@ __copyright__ = 	"Copyright 2010, Gumstix Inc."
 __license__ = 		"BSD 2-Clause"
 __version__ =			"0.1"
 
-isr_list = {
-  16 : 'INT_GPIOA_HANDLER()',
-}
-
 def listen():
 	"""Listen for responses and unsolicited messages (interrupts).
 	"""
 	global robovero
+	
 	while robovero:
-		
-		message = ""
-		while "\r\n" not in message:
-			if not robovero:
-				exit()
-			try:
-				message += robovero.serial.read(1)
-			except:
-				robovero.debug.write("ERROR: USB connection lost\r\n")
-				exit("error: USB connection lost")
+		message = robovero.readline("\r\n")
 					
-		if message == "\r\n":
-			robovero.debug.write("INTERRUPT: ")
+		if message == "":
+			robovero.debug.write("[%f] INTERRUPT: " % (time.time() - robovero.start_time))
 			robovero.serial.timeout = None
-			int_num = int(robovero.serial.readline(), 16)
-			robovero.debug.write("%d\r\n" % int_num)
+			IRQn = int(robovero.readline("\r\n"), 16)
+			robovero.debug.write("%x\r\n" % IRQn)
 			robovero.serial.timeout = 0
-			isrthread = threading.Thread(target=isr, args=[int_num], name="isr")
+			isrthread = threading.Thread(target=isr, args=[IRQn], name="isr")
 			isrthread.start()
 			
 		else:
@@ -51,18 +39,20 @@ def getReturn():
 	robovero.response = None
 	return ret
 
+isr_list = {}
 
-def isr(int_num):
+def isr(IRQn):
 	"""When an interrupt occurs, call the ISR then clear and reenable
 	the interrupt.
 	"""
-	global robovero
-	print "Interrupt!"
-# TODO
-#	with robovero.lock:
-#		exec(isr_list[int_num])
-#		IntPendClear(int_num)
-#		IntEnable(int_num)
+	with robovero.lock:
+		if IRQn in isr_list:
+			isr_list[IRQn]()
+		else:
+			robovero.debug.write("[%f] INTERRUPT: unhandled!" % (time.time() - robovero.start_time))
+			return
+		robocaller("NVIC_ClearPendingIRQ", "void", IRQn)
+		robocaller("NVIC_EnableIRQ", "void", IRQn)
 	
 def robocaller(function, ret_type, *args):
 	"""Serialize a function and it's arguments and send to device.
@@ -77,11 +67,11 @@ def robocaller(function, ret_type, *args):
 			else:
 				function += " %X" % (arg)
 		function += "\r\n"
-		robovero.debug.write("REQUEST: %s" % function)
+		robovero.debug.write("[%f] REQUEST: %s" % (time.time() - robovero.start_time, function))
 		robovero.serial.write(function)
 		if ret_type != "void":
 			ret = getReturn()
-			robovero.debug.write("RESPONSE: %s" % ret)
+			robovero.debug.write("[%f] RESPONSE: %s" % (time.time() - robovero.start_time, ret))
 			if " " in ret:
 				ret = [int(x, 16) for x in ret.split()]
 			else:
@@ -114,7 +104,15 @@ def free(ptr):
 	"""Free previously allocated memory.
 	"""
 	return robocaller("free", "void", ptr)
-	
+
+def deref(ptr, size, val=None):
+	"""Dereference a pointer.
+	"""
+	if val:
+		return robocaller("deref", "void", ptr, size, val)
+	else:
+		return robocaller("deref", "int", ptr, size)
+
 def resetConfig():
 	"""Simulate a reset condition without losing the usb connection."""
 	return robocaller("resetConfig", "void")
@@ -192,7 +190,8 @@ class Robovero(object):
 			self.serial = serial.Serial('/dev/%s' % devices[idx])
 		except:
 			exit("Couldn't open device.")
-			
+		
+		self.start_time = time.time()
 		self.serial.timeout = 0
 		# send line terminator, disable console echo and prompt
 		self.serial.write("\r\n")
@@ -213,7 +212,21 @@ class Robovero(object):
 		self.listener = threading.Thread(target=listen, name="listener")
 		self.listener.daemon = True
 		self.listener.start()
-	
+		
+	def readline(self, delim):
+		"""Get one character at a time until the specified delimiter is found.
+		"""
+		message = ""
+		while delim not in message:
+			if not robovero:
+				exit()
+			try:
+				message += self.serial.read(1)
+			except:
+				self.debug.write("[%f] ERROR: USB connection lost\r\n"  % (time.time() - self.start_time))
+				exit("error: USB connection lost")
+		return message.strip(delim)
+				
 	def __del__(self):
 		"""Send any remaining data and close the serial connection.
 		"""
