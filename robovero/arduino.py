@@ -3,7 +3,9 @@
 
 from lpc17xx_gpio import * # bad form!
 from lpc17xx_adc import *  #
+from lpc17xx_pwm import *
 from LPC17xx import *      #
+from extras import initMatch
 from lpc_types import *    #
 from time import sleep
 
@@ -43,7 +45,8 @@ BTN = 			"BTN"
 LED = 			"LED"
 
 class DigitalPin(object):
-	"""Need the port and pin numbers to configure digital IO."""
+	"""Need the port and pin numbers to configure digital IO.
+	"""
 	def __init__(self, portnum, pinnum):
 		self.portnum = portnum
 		self.pinnum = pinnum
@@ -68,8 +71,8 @@ digital_pins = {
 
 
 def pinMode(pin, mode):
-	"""Configures the specified pin to behave either as an input or an
-	output."""
+	"""Configures the specified pin to behave either as an input or an output.
+	"""
 	global digital_pins, modes
 	
 	if pin not in digital_pins:
@@ -84,13 +87,13 @@ def pinMode(pin, mode):
 			print key,
 		exit(1)
 	
-	GPIO_SetDir(digital_pins[pin].portnum,
-							(1 << digital_pins[pin].pinnum),
-							modes[mode]);
+	GPIO_SetDir(digital_pins[pin].portnum, (1 << digital_pins[pin].pinnum),
+			modes[mode]);
 
 
 def digitalWrite(pin, value):
-	"""Write a HIGH or a LOW value to a digital pin."""
+	"""Write a HIGH or a LOW value to a digital pin.
+	"""
 	global digital_pins, values
 	
 	if pin not in digital_pins:
@@ -112,8 +115,8 @@ def digitalWrite(pin, value):
 
 
 def digitalRead(pin):
-	"""Reads the value from a specified digital pin, either HIGH or 
-	LOW."""
+	"""Reads the value from a specified digital pin, either HIGH or LOW.
+	"""
 	global digital_pins
 	
 	if pin not in digital_pins:
@@ -132,32 +135,18 @@ def digitalRead(pin):
 # Analog I/O
 ########################################################################
 
-references = 	{}
-
-AD0_0 =				"AD0_0"
-AD0_1 =				"AD0_1"
-AD0_2 =				"AD0_2"
-AD0_3 =				"AD0_3"
-AD0_5 =				"AD0_5"
-AD0_6 =				"AD0_6"
-AD0_7 =				"AD0_7"
-
-PWM1 =				"PWM1"
-PWM2 =				"PWM2"
-PWM3 =				"PWM3"
-PWM4 =				"PWM4"
-PWM5 =				"PWM5"
-PWM6 =				"PWM6"
+AD0_0 = "AD0_0"
+AD0_1 =	"AD0_1"
+AD0_2 =	"AD0_2"
+AD0_3 =	"AD0_3"
+AD0_5 =	"AD0_5"
+AD0_6 =	"AD0_6"
+AD0_7 =	"AD0_7"
 
 class AnalogPin(object):
 	def __init__(self, channel, interrupt):
 		self.channel = channel
 		self.interrupt = interrupt
-
-class PWMPin(object):
-	def __init__(self):
-		#TODO
-		pass
 		
 analog_pins = {
 	AD0_0:AnalogPin(ADC_CHANNEL_SELECTION.ADC_CHANNEL_0, ADC_TYPE_INT_OPT.ADC_ADINTEN0),
@@ -169,25 +158,11 @@ analog_pins = {
 	AD0_7:AnalogPin(ADC_CHANNEL_SELECTION.ADC_CHANNEL_7, ADC_TYPE_INT_OPT.ADC_ADINTEN7),
 }
 
-#~ pwm_pins = {
-	#~ PWM1:Pin(1, 18),
-	#~ PWM2:Pin(1, 20),
-	#~ PWM3:Pin(3, 26),
-	#~ PWM4:Pin(1, 23),
-	#~ PWM5:Pin(1, 24),
-	#~ PWM6:Pin(2, 5),
-#~ }
-
-
-def analogReference(reference):
-	"""Configures the reference voltage used for analog input."""
-	# TODO
-	pass
-
-
 def analogRead(pin):
-	"""Reads the value from the specified analog pin. Assumes that 
-	extras.roboveroConfig() has been called to initialize the ADC."""
+	"""Reads the value from the specified analog pin. 
+	
+	Assumes that extras.roboveroConfig() has been called to initialize the ADC.
+	"""
 	global analog_pins
 	
 	if pin not in analog_pins:
@@ -203,13 +178,47 @@ def analogRead(pin):
 
 	return adc_value
 
+		
+PWM1 = "PWM1"
+PWM2 = "PWM2"
+PWM3 = "PWM3"
+PWM4 = "PWM4"
+PWM5 = "PWM5"
+PWM6 = "PWM6"
+
+pwm_pins = {
+	PWM1:1,
+	PWM2:2,
+	PWM3:3,
+	PWM4:4,
+	PWM5:5,
+	PWM6:6,
+}
 
 def analogWrite(pin, value):
-	"""Writes an analog value (PWM wave) to a pin."""
+	"""Writes an analog value (PWM wave) to a pin.
+	"""
 	global pwm_pins
-	# TODO: configure a PWM pin with duty cycle to generate pseudo analog
-	#				output
+	
+	if pin not in pwm_pins:
+		print "Pin must be one of:"
+		for key in pwm_pins:
+			print key
+		exit(1)	
 
+	if value < 0 or value > 255:
+		print "Invalid duty cycle"
+		exit(1)
 
+	# 490Hz
+	period = 1000000/490
+	pulse_width = period*value/255
+	initMatch(0, period)
+	initMatch(pwm_pins[pin], pulse_width)
 
+	PWM_ChannelCmd(LPC_PWM1, pwm_pins[pin], FunctionalState.ENABLE)
+	PWM_ResetCounter(LPC_PWM1)
+	PWM_CounterCmd(LPC_PWM1, FunctionalState.ENABLE)
+	PWM_Cmd(LPC_PWM1, FunctionalState.ENABLE)	
+	
 
