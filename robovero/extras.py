@@ -69,7 +69,7 @@ def initMatch(ch, count):
   """
   return robocaller("initMatch", "void", ch, count)
   
-def registerISR(IRQn, function):
+def registerCallback(IRQn, function):
   """Register a RoboVero interrupt service routine.
   
   Pass the IRQ number and function to call when an interrupt occurs.

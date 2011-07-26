@@ -1,11 +1,10 @@
-"""Demonstrates the use of interrupts. Press the onboard button S2 to toggle
-led using an interrupt.
+"""Demonstrates the use of callbacks. Press the onboard button S2 to toggle led.
 """
 
 from robovero.LPC17xx import IRQn_Type
 from robovero.core import NVIC_EnableIRQ
 from robovero.arduino import pinMode, digitalWrite, digitalRead, BTN, LED, OUTPUT
-from robovero.extras import heartbeatOff, registerISR
+from robovero.extras import heartbeatOff, registerCallback
 from robovero.lpc17xx_exti import *
 from robovero.lpc17xx_pinsel import *
 from time import sleep
@@ -24,8 +23,8 @@ responses = (
   "Hammer says"
   )
 
-def EINT0ISR():
-	"""Interrupt service routine for EINT0.
+def EINT0Callback():
+	"""Callback function for EINT0.
 	"""
 	while not digitalRead(BTN):
 		sleep(0)
@@ -38,7 +37,7 @@ def EINT0ISR():
 heartbeatOff()
 pinMode(LED, OUTPUT)
 
-# enable EINT0 on pin 2.10
+# setup EINT0 on pin 2.10
 PinCfg = PINSEL_CFG_Type()
 PinCfg.Funcnum = 1
 PinCfg.OpenDrain = 0
@@ -48,11 +47,13 @@ PinCfg.Portnum = 2
 PINSEL_ConfigPin(PinCfg.ptr)
 EXTI_Init()
 
-# register and enable the interrupt
-registerISR(IRQn_Type.EINT0_IRQn, EINT0ISR)
+# register the callback
+registerCallback(IRQn_Type.EINT0_IRQn, EINT0Callback)
+
+# enable EINT0
 NVIC_EnableIRQ(IRQn_Type.EINT0_IRQn)
 
-# the ISR does everything from here
+# the callback does everything from here
 while True:
 	pass
 

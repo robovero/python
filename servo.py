@@ -19,7 +19,8 @@ __version__ =			"0.1"
 
 
 def getServoAngle():
-	"""Get an angle from the user and calculate new duty cycle"""
+	"""Get an angle from the user and calculate new duty cycle.
+	"""
 	user_angle = raw_input("New angle: ")
 	try:
 		angle = int(user_angle)
