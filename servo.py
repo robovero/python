@@ -1,4 +1,7 @@
 """Set position of servo 1 (PWM1) to an angle provided by the user.
+
+You must have an RC servo connected to PWM1 for this example. Otherwise, you
+can observe the control signal with an oscilloscope or logic analyzer.
 """
 
 from robovero.LPC17xx import LPC_PWM1
