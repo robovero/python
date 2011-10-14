@@ -608,7 +608,9 @@ class SFF_Entry(cstruct):
             MSG_ENABLE: disable bit = 0
             MSG_DISABLE: disable bit = 1
   id_11:  Standard ID, should be 11-bit value
-  
+  ptr:  LPC1769 memory address where structure is stored. Use this in place of
+        the C reference operator (&).
+        
   '''
 	pass
 
@@ -629,7 +631,9 @@ class CAN_MSG_Type(cstruct):
         DATA_FRAME: the number of data bytes called out by the DLC
                     field are send from the CANxTDA and CANxTDB registers
         REMOTE_FRAME: Remote Frame is sent
-  
+  ptr:  LPC1769 memory address where structure is stored. Use this in place of
+        the C reference operator (&).
+        
   '''
 	pass		
 
@@ -712,7 +716,9 @@ class FullCAN_Entry(cstruct):
             MSG_ENABLE: disable bit = 0
             MSG_DISABLE: disable bit = 1
   id_11:  Standard ID, should be 11-bit value
-  
+  ptr:  LPC1769 memory address where structure is stored. Use this in place of
+        the C reference operator (&).
+        
   '''
 	pass
 
@@ -727,7 +733,9 @@ class EFF_GPR_Entry(cstruct):
                 MSG_DISABLE: disable bit = 1
   lowerEID: Extended ID lower bound, should be 29-bit value
   upperEID: Extended ID upper bound, should be 29-bit value
-  
+  ptr:  LPC1769 memory address where structure is stored. Use this in place of
+        the C reference operator (&).
+        
   '''
 	pass
 
@@ -774,7 +782,9 @@ class CAN_PinCFG_Type(cstruct):
       For CAN2:
       CAN_TD2_P0_5: TD pin is on P0.5
       CAN_TD2_P2_8: TD pin is on P2.8
-  
+  ptr:  LPC1769 memory address where structure is stored. Use this in place of
+        the C reference operator (&).
+        
   '''
 	pass
 
@@ -810,7 +820,11 @@ class SFF_GPR_Entry(cstruct):
   disable2: Second Disable bit, should be:
             MSG_ENABLE: disable bit = 0
             MSG_DISABLE: disable bit = 1
-  upperID: ID upper bound, should be 11-bit value and equal or greater than lowerID
+  upperID:  ID upper bound, should be 11-bit value and equal or greater than
+            lowerID
+  ptr:  LPC1769 memory address where structure is stored. Use this in place of
+        the C reference operator (&).
+        
   '''
 	pass
 
@@ -841,7 +855,9 @@ class EFF_Entry(cstruct):
               CAN1_CTRL: CAN1 Controller
               CAN2_CTRL: CAN2 Controller
   ID_29:  Extend ID, shoud be 29-bit value
-  
+  ptr:  LPC1769 memory address where structure is stored. Use this in place of
+        the C reference operator (&).
+        
   '''
 	pass
 
@@ -858,7 +874,9 @@ class AF_SectionDef(cstruct):
   EFF_NumEntry: Extended ID Entry Number
   EFF_GPR_Sec: The pointer point to EFF_GPR_Entry
   EFF_GPR_NumEntry: Group Extended ID Entry Number
-  
+  ptr:  LPC1769 memory address where structure is stored. Use this in place of
+        the C reference operator (&).
+        
   '''
 	pass
 

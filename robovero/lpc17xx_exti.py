@@ -33,7 +33,9 @@ class EXTI_InitTypeDef(cstruct):
                   low or high active level
                   if EXTI mode is polarity-sensitive: this element use to select
                   falling or rising edge
-  
+  ptr:  LPC1769 memory address where structure is stored. Use this in place of
+        the C reference operator (&).
+        
   '''
   pass
 

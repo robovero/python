@@ -341,7 +341,9 @@ class GPDMA_LLI_Type(cstruct):
   DstAddr: Destination address
   NextLLI: Next LLI address, otherwise set to '0'
   Control: GPDMA Control of this LLI
-  
+  ptr:  LPC1769 memory address where structure is stored. Use this in place of
+        the C reference operator (&).
+        
   '''
   pass
 
@@ -403,6 +405,9 @@ class GPDMA_Channel_CFG_Type(cstruct):
             GPDMA_CONN_UART3_Rx_MAT3_1: UART3 Rx / MAT3.1
   DMALLI: Linker List Item structure data address if there's no Linker List, set
           as '0'
+  ptr:  LPC1769 memory address where structure is stored. Use this in place of
+        the C reference operator (&).
+        
   '''
   pass
 

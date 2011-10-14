@@ -198,7 +198,9 @@ class I2C_M_SETUP_Type(cstruct):
   status: Current status of I2C activity
   callback: Pointer to Call back function when transmission complete used in 
             interrupt transfer mode
-  
+  ptr:  LPC1769 memory address where structure is stored. Use this in place of
+        the C reference operator (&).
+        
   '''
   pass
 
@@ -219,7 +221,9 @@ class I2C_OWNSLAVEADDR_CFG_Type(cstruct):
                       In other words, bits in SlaveAddr_7bit value which are 
                       masked are not taken into account in determining an 
                       address match
-                      
+  ptr:  LPC1769 memory address where structure is stored. Use this in place of
+        the C reference operator (&).
+                          
   '''
   pass
 
@@ -243,6 +247,8 @@ class I2C_S_SETUP_Type(cstruct):
   status: Current status of I2C activity
   callback: Pointer to Call back function when transmission complete used in 
             interrupt transfer mode
+  ptr:  LPC1769 memory address where structure is stored. Use this in place of
+        the C reference operator (&).
             
   '''
   pass

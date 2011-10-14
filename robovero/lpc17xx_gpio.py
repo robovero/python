@@ -51,6 +51,9 @@ class GPIO_HalfWord_TypeDef(cstruct):
   FIOSETU:  FIO set register upper halfword part
   FIOCLRL:  FIO clear register lower halfword part
   FIOCLRU:  FIO clear register upper halfword part
+  ptr:  LPC1769 memory address where structure is stored. Use this in place of
+        the C reference operator (&).
+        
   '''
   pass
 

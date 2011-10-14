@@ -625,7 +625,9 @@ class RX_Stat(cstruct):
   
   Info: Receive Information Status
   HashCRC: Receive Hash CRC Status
-  
+  ptr:  LPC1769 memory address where structure is stored. Use this in place of
+        the C reference operator (&).
+        
   '''
   pass
 
@@ -640,7 +642,9 @@ class EMAC_CFG_Type(cstruct):
         EMAC_MODE_100M_HALF
   pbEMAC_Addr:  Pointer to EMAC Station address that contains 6-bytes
                 of MAC address, it must be sorted in order (bEMAC_Addr[0]..[5])
-                
+  ptr:  LPC1769 memory address where structure is stored. Use this in place of
+        the C reference operator (&).
+                 
   '''
   pass
 
@@ -649,7 +653,9 @@ class EMAC_PACKETBUF_Type(cstruct):
   
   ulDataLen: Data length
   pbDataBuf: A word-align data pointer to data buffer
-  
+  ptr:  LPC1769 memory address where structure is stored. Use this in place of
+        the C reference operator (&).
+        
   '''
   pass
 
@@ -658,7 +664,9 @@ class RX_Desc(cstruct):
   
   Packet: Receive Packet Descriptor
   Ctrl: Receive Control Descriptor
-  
+  ptr:  LPC1769 memory address where structure is stored. Use this in place of
+        the C reference operator (&).
+        
   '''
   pass
 
@@ -667,7 +675,9 @@ class TX_Desc(cstruct):
   
   Packet: Transmit Packet Descriptor
   Ctrl: Transmit Control Descriptor
-  
+  ptr:  LPC1769 memory address where structure is stored. Use this in place of
+        the C reference operator (&).
+        
   '''
   pass
 
@@ -675,7 +685,9 @@ class TX_Stat(cstruct):
   '''TX Status structure type definition.
   
   Info: Transmit Information Status
-  
+  ptr:  LPC1769 memory address where structure is stored. Use this in place of
+        the C reference operator (&).
+        
   '''
   pass
 
