@@ -6,10 +6,12 @@ documentation.
 from internals import robocaller, cstruct
 
 __author__ =      "Neil MacMunn"
-__email__ =        "neil@gumstix.com"
-__copyright__ =   "Copyright 2010, Gumstix Inc"
+__credits__ =     ["Neil MacMunn", "NXP MCU SW Application Team"]
+__maintainer__ =  "Neil MacMunn"
+__email__ =       "neil@gumstix.com"
+__copyright__ =   "Copyright 2011, Gumstix Inc"
 __license__ =     "BSD 2-Clause"
-__version__ =      "0.1"
+__version__ =     "0.1"
 
 # Edge aligned mode for channel in MCPWM
 MCPWM_CHANNEL_EDGE_MODE = ((0))

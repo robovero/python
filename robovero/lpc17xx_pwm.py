@@ -4,15 +4,18 @@ Peripheral Firmware Driver Library documentation.
 
 from internals import robocaller, cstruct
 
-__author__ =			"Neil MacMunn"
-__email__ =				"neil@gumstix.com"
-__copyright__ = 	"Copyright 2010, Gumstix Inc"
-__license__ = 		"BSD 2-Clause"
-__version__ =			"0.1"
+__author__ =      "Neil MacMunn"
+__credits__ =     ["Neil MacMunn", "NXP MCU SW Application Team"]
+__maintainer__ =  "Neil MacMunn"
+__email__ =       "neil@gumstix.com"
+__copyright__ =   "Copyright 2011, Gumstix Inc"
+__license__ =     "BSD 2-Clause"
+__version__ =     "0.1"
 
 def PWM_IR_PWMMRn(n):
-	if (n<4): return (1<<n)
-	else: return (1<<(n+4))
+  """Interrupt flag for PWM match channel for 6 channel"""
+  if (n<4): return (1<<n)
+  else: return (1<<(n+4))
   
 def PWM_IR_PWMCAPn(n):
   return ((1<<(n+4)))

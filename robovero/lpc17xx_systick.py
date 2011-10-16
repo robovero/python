@@ -4,11 +4,13 @@ Standard Peripheral Firmware Driver Library documentation.
 
 from internals import robocaller
 
-__author__ =			"Neil MacMunn"
-__email__ =				"neil@gumstix.com"
-__copyright__ = 	"Copyright 2010, Gumstix Inc"
-__license__ = 		"BSD 2-Clause"
-__version__ =			"0.1"
+__author__ =      "Neil MacMunn"
+__credits__ =     ["Neil MacMunn", "NXP MCU SW Application Team"]
+__maintainer__ =  "Neil MacMunn"
+__email__ =       "neil@gumstix.com"
+__copyright__ =   "Copyright 2011, Gumstix Inc"
+__license__ =     "BSD 2-Clause"
+__version__ =     "0.1"
 
 ST_CTRL_ENABLE = (1<<0)
 ST_CTRL_TICKINT = (1<<1)

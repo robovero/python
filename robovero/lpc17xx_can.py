@@ -4,11 +4,13 @@ CMSIS-Compliant Standard Peripheral Firmware Driver Library documentation.
 
 from internals import robocaller, cstruct
 
-__author__ =			"Neil MacMunn"
-__email__ =				"neil@gumstix.com"
-__copyright__ = 	"Copyright 2010, Gumstix Inc"
-__license__ = 		"BSD 2-Clause"
-__version__ =			"0.1"
+__author__ =      "Neil MacMunn"
+__credits__ =     ["Neil MacMunn", "NXP MCU SW Application Team"]
+__maintainer__ =  "Neil MacMunn"
+__email__ =       "neil@gumstix.com"
+__copyright__ =   "Copyright 2011, Gumstix Inc"
+__license__ =     "BSD 2-Clause"
+__version__ =     "0.1"
 
 # CAN Public Macros
 MSG_ENABLE = ((0))
