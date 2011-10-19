@@ -1,5 +1,6 @@
-"""Quadrature encoder interface client library functions. See LPC17xx 
-CMSIS-Compliant Standard Peripheral Firmware Driver Library documentation."""
+"""Quadrature encoder interface client library functions. Find implementation
+details in LPC17xx CMSIS-Compliant Standard Peripheral Firmware Driver Library
+documentation."""
 
 from internals import robocaller, cstruct
 
@@ -11,253 +12,427 @@ __copyright__ =   "Copyright 2011, Gumstix Inc"
 __license__ =     "BSD 2-Clause"
 __version__ =     "0.1"
 
-QEI_DIRINV_NONE = (0)		
-QEI_DIRINV_CMPL = (1)		
-QEI_SIGNALMODE_QUAD = (0)		
-QEI_SIGNALMODE_CLKDIR = (1)		
-QEI_CAPMODE_2X = (0)		
-QEI_CAPMODE_4X = (1)		
-QEI_INVINX_NONE = (0)		
-QEI_INVINX_EN = (1)		
-QEI_TIMERRELOAD_TICKVAL = (0)	
-QEI_TIMERRELOAD_USVAL = (1)	
-QEI_STATUS_DIR = (1<<0)	
-QEI_COMPPOS_CH_0 = (0)		
-QEI_COMPPOS_CH_1 = (1)		
-QEI_COMPPOS_CH_2 = (2)		
-QEI_INTFLAG_INX_Int = (1<<0)	
-QEI_INTFLAG_TIM_Int = (1<<1)	
-QEI_INTFLAG_VELC_Int = (1<<2)	
-QEI_INTFLAG_DIR_Int = (1<<3)	
-QEI_INTFLAG_ERR_Int = (1<<4)	
-QEI_INTFLAG_ENCLK_Int = (1<<5)	
-QEI_INTFLAG_POS0_Int = (1<<6)	
-QEI_INTFLAG_POS1_Int = (1<<7)	
-QEI_INTFLAG_POS2_Int = (1<<8)	
-QEI_INTFLAG_REV_Int = (1<<9)	
-QEI_INTFLAG_POS0REV_Int = (1<<10)	
-QEI_INTFLAG_POS1REV_Int = (1<<11)	
-QEI_INTFLAG_POS2REV_Int = (1<<12)	
-QEI_CON_RESP = (1<<0)		
-QEI_CON_RESPI = (1<<1)		
-QEI_CON_RESV = (1<<2)		
-QEI_CON_RESI = (1<<3)		
-QEI_CON_BITMASK = (0x0F)		
-QEI_CONF_DIRINV = (1<<0)		
-QEI_CONF_SIGMODE = (1<<1)		
-QEI_CONF_CAPMODE = (1<<2)		
-QEI_CONF_INVINX = (1<<3)		
-QEI_CONF_BITMASK = (0x0F)		
-QEI_STAT_DIR = (1<<0)		
-QEI_STAT_BITMASK = (1<<0)		
-QEI_INTSTAT_INX_Int = (1<<0)	
-QEI_INTSTAT_TIM_Int = (1<<1)	
-QEI_INTSTAT_VELC_Int = (1<<2)	
-QEI_INTSTAT_DIR_Int = (1<<3)	
-QEI_INTSTAT_ERR_Int = (1<<4)	
-QEI_INTSTAT_ENCLK_Int = (1<<5)	
-QEI_INTSTAT_POS0_Int = (1<<6)	
-QEI_INTSTAT_POS1_Int = (1<<7)	
-QEI_INTSTAT_POS2_Int = (1<<8)	
-QEI_INTSTAT_REV_Int = (1<<9)	
-QEI_INTSTAT_POS0REV_Int = (1<<10)	
-QEI_INTSTAT_POS1REV_Int = (1<<11)	
-QEI_INTSTAT_POS2REV_Int = (1<<12)	
-QEI_INTSTAT_BITMASK = (0x1FFF)	
-QEI_INTSET_INX_Int = (1<<0)	
-QEI_INTSET_TIM_Int = (1<<1)	
-QEI_INTSET_VELC_Int = (1<<2)	
-QEI_INTSET_DIR_Int = (1<<3)	
-QEI_INTSET_ERR_Int = (1<<4)	
-QEI_INTSET_ENCLK_Int = (1<<5)	
-QEI_INTSET_POS0_Int = (1<<6)	
-QEI_INTSET_POS1_Int = (1<<7)	
-QEI_INTSET_POS2_Int = (1<<8)	
-QEI_INTSET_REV_Int = (1<<9)	
-QEI_INTSET_POS0REV_Int = (1<<10)	
-QEI_INTSET_POS1REV_Int = (1<<11)	
-QEI_INTSET_POS2REV_Int = (1<<12)	
-QEI_INTSET_BITMASK = (0x1FFF)	
-QEI_INTCLR_INX_Int = (1<<0)	
-QEI_INTCLR_TIM_Int = (1<<1)	
-QEI_INTCLR_VELC_Int = (1<<2)	
-QEI_INTCLR_DIR_Int = (1<<3)	
-QEI_INTCLR_ERR_Int = (1<<4)	
-QEI_INTCLR_ENCLK_Int = (1<<5)	
-QEI_INTCLR_POS0_Int = (1<<6)	
-QEI_INTCLR_POS1_Int = (1<<7)	
-QEI_INTCLR_POS2_Int = (1<<8)	
-QEI_INTCLR_REV_Int = (1<<9)	
-QEI_INTCLR_POS0REV_Int = (1<<10)	
-QEI_INTCLR_POS1REV_Int = (1<<11)	
-QEI_INTCLR_POS2REV_Int = (1<<12)	
-QEI_INTCLR_BITMASK = (0x1FFF)	
-QEI_INTEN_INX_Int = (1<<0)	
-QEI_INTEN_TIM_Int = (1<<1)	
-QEI_INTEN_VELC_Int = (1<<2)	
-QEI_INTEN_DIR_Int = (1<<3)	
-QEI_INTEN_ERR_Int = (1<<4)	
-QEI_INTEN_ENCLK_Int = (1<<5)	
-QEI_INTEN_POS0_Int = (1<<6)	
-QEI_INTEN_POS1_Int = (1<<7)	
-QEI_INTEN_POS2_Int = (1<<8)	
-QEI_INTEN_REV_Int = (1<<9)	
-QEI_INTEN_POS0REV_Int = (1<<10)	
-QEI_INTEN_POS1REV_Int = (1<<11)	
-QEI_INTEN_POS2REV_Int = (1<<12)	
-QEI_INTEN_BITMASK = (0x1FFF)	
-QEI_IESET_INX_Int = (1<<0)	
-QEI_IESET_TIM_Int = (1<<1)	
-QEI_IESET_VELC_Int = (1<<2)	
-QEI_IESET_DIR_Int = (1<<3)	
-QEI_IESET_ERR_Int = (1<<4)	
-QEI_IESET_ENCLK_Int = (1<<5)	
-QEI_IESET_POS0_Int = (1<<6)	
-QEI_IESET_POS1_Int = (1<<7)	
-QEI_IESET_POS2_Int = (1<<8)	
-QEI_IESET_REV_Int = (1<<9)	
-QEI_IESET_POS0REV_Int = (1<<10)	
-QEI_IESET_POS1REV_Int = (1<<11)	
-QEI_IESET_POS2REV_Int = (1<<12)	
-QEI_IESET_BITMASK = (0x1FFF)	
-QEI_IECLR_INX_Int = (1<<0)	
-QEI_IECLR_TIM_Int = (1<<1)	
-QEI_IECLR_VELC_Int = (1<<2)	
-QEI_IECLR_DIR_Int = (1<<3)	
-QEI_IECLR_ERR_Int = (1<<4)	
-QEI_IECLR_ENCLK_Int = (1<<5)	
-QEI_IECLR_POS0_Int = (1<<6)	
-QEI_IECLR_POS1_Int = (1<<7)	
-QEI_IECLR_POS2_Int = (1<<8)	
-QEI_IECLR_REV_Int = (1<<9)	
-QEI_IECLR_POS0REV_Int = (1<<10)	
-QEI_IECLR_POS1REV_Int = (1<<11)	
-QEI_IECLR_POS2REV_Int = (1<<12)	
-QEI_IECLR_BITMASK = (0x1FFF)
-QEI_RESET_POS = QEI_CON_RESP		
-QEI_RESET_POSOnIDX = QEI_CON_RESPI		
-QEI_RESET_VEL = QEI_CON_RESV		
-QEI_RESET_IDX = QEI_CON_RESI		
 
-def PARAM_QEIx(n):
-  return (n==LPC_QEI)
+# QEI Reset types
+# Reset position counter
+QEI_RESET_POS = (1)
+# Reset Position Counter on Index
+QEI_RESET_POSOnIDX = (2)
+# Reset Velocity
+QEI_RESET_VEL = (4)
+# Reset Index Counter
+QEI_RESET_IDX  = (8)
 
-def PARAM_QEI_RESET(n):
-  return (
-		(n==QEI_CON_RESP) 
-		or (n==QEI_RESET_POSOnIDX) 
-		or (n==QEI_RESET_VEL) 
-		or (n==QEI_RESET_IDX)
-		)
+# QEI Direction Invert Type Option
+# Direction is not inverted
+QEI_DIRINV_NONE = (0)
+# Direction is complemented
+QEI_DIRINV_CMPL = (1)
 
-def PARAM_QEI_DIRINV(n):
-  return ((n==QEI_DIRINV_NONE) or (n==QEI_DIRINV_CMPL))
+# QEI Signal Mode Option
+# Signal operation: Quadrature phase mode
+QEI_SIGNALMODE_QUAD = (0)
+# Signal operation: Clock/Direction mode
+QEI_SIGNALMODE_CLKDIR = (1)
 
-def PARAM_QEI_SIGNALMODE(n):
-  return ((n==QEI_SIGNALMODE_QUAD) or (n==QEI_SIGNALMODE_CLKDIR))
+# QEI Capture Mode Option
+# Capture mode: Only Phase-A edges are counted (2X)
+QEI_CAPMODE_2X = (0)
+# Capture mode: BOTH PhA and PhB edges are counted (4X)
+QEI_CAPMODE_4X = (1)
 
-def PARAM_QEI_CAPMODE(n):
-  return ((n==QEI_CAPMODE_2X) or (n==QEI_CAPMODE_4X))
+# QEI Invert Index Signal Option
+# Invert Index signal option: None
+QEI_INVINX_NONE = (0)
+# Invert Index signal option: Enable
+QEI_INVINX_EN = (1)
 
-def PARAM_QEI_INVINX(n):
-  return ((n==QEI_INVINX_NONE) or (n==QEI_INVINX_EN))
+# QEI timer reload option
+# Reload value in absolute value
+QEI_TIMERRELOAD_TICKVAL = (0)  
+# Reload value in microsecond value
+QEI_TIMERRELOAD_USVAL = (1)  
 
-def PARAM_QEI_TIMERRELOAD(n):
-  return ((n==QEI_TIMERRELOAD_TICKVAL) or (n==QEI_TIMERRELOAD_USVAL))
+# QEI Flag Status type 
+# Direction status
+QEI_STATUS_DIR = (1<<0)  
 
-def PARAM_QEI_STATUS(n):
-  return (n==QEI_STATUS_DIR)
+# QEI Compare Position channel option
+# QEI compare position channel 0
+QEI_COMPPOS_CH_0 = (0)
+# QEI compare position channel 1
+QEI_COMPPOS_CH_1 = (1)
+# QEI compare position channel 2
+QEI_COMPPOS_CH_2 = (2)
 
-def PARAM_QEI_COMPPOS_CH(n):
-  return (
-		(n==QEI_COMPPOS_CH_0) 
-		or (n==QEI_COMPPOS_CH_1) 
-		or (n==QEI_COMPPOS_CH_2)
-		)
+# QEI interrupt flag type
+# index pulse was detected interrupt
+QEI_INTFLAG_INX_Int = (1<<0)  
+# Velocity timer over flow interrupt
+QEI_INTFLAG_TIM_Int = (1<<1)  
+# Capture velocity is less than compare interrupt
+QEI_INTFLAG_VELC_Int = (1<<2)  
+# Change of direction interrupt
+QEI_INTFLAG_DIR_Int = (1<<3)  
+# An encoder phase error interrupt
+QEI_INTFLAG_ERR_Int = (1<<4)  
+# An encoder clock pulse was detected interrupt
+QEI_INTFLAG_ENCLK_Int = (1<<5)  
+# position 0 compare value is equal to the current position interrupt
+QEI_INTFLAG_POS0_Int = (1<<6)  
+# position 1 compare value is equal to the current position interrupt
+QEI_INTFLAG_POS1_Int = (1<<7)  
+# position 2 compare value is equal to the current position interrupt
+QEI_INTFLAG_POS2_Int = (1<<8)  
+# Index compare value is equal to the current index count interrupt
+QEI_INTFLAG_REV_Int = (1<<9)  
+# Combined position 0 and revolution count interrupt
+QEI_INTFLAG_POS0REV_Int = (1<<10)  
+# Combined position 1 and revolution count interrupt
+QEI_INTFLAG_POS1REV_Int = (1<<11)  
+# Combined position 2 and revolution count interrupt
+QEI_INTFLAG_POS2REV_Int = (1<<12)
 
-def PARAM_QEI_INTFLAG(n):
-  return (
-		(n==QEI_INTFLAG_INX_Int) 
-		or (n==QEI_INTFLAG_TIM_Int) 
-		or (n==QEI_INTFLAG_VELC_Int) 
-		or (n==QEI_INTFLAG_DIR_Int) 
-		or (n==QEI_INTFLAG_ERR_Int) 
-		or (n==QEI_INTFLAG_ENCLK_Int) 
-		or (n==QEI_INTFLAG_POS0_Int) 
-		or (n==QEI_INTFLAG_POS1_Int) 
-		or (n==QEI_INTFLAG_POS2_Int) 
-		or (n==QEI_INTFLAG_REV_Int) 
-		or (n==QEI_INTFLAG_POS0REV_Int) 
-		or (n==QEI_INTFLAG_POS1REV_Int) 
-		or (n==QEI_INTFLAG_POS2REV_Int)
-		)
-		
+
 class QEI_CFG_Type(cstruct):
-	pass
+  '''QEI Configuration structure type definition.
+  
+   DirectionInvert:  1-bit Direction invert option:
+                    - QEI_DIRINV_NONE: QEI Direction is normal
+                    - QEI_DIRINV_CMPL: QEI Direction is complemented
+  SignalMode: 1-bit Signal mode Option:
+              - QEI_SIGNALMODE_QUAD: Signal is in Quadrature phase mode
+              - QEI_SIGNALMODE_CLKDIR: Signal is in Clock/Direction mode
+  CaptureMode:  1-bit Capture Mode Option:
+                - QEI_CAPMODE_2X: Only Phase-A edges are counted (2X)
+                - QEI_CAPMODE_4X: BOTH Phase-A and Phase-B edges are counted (4X)
+  InvertIndex:  1-bit Invert Index Option:
+                - QEI_INVINX_NONE: the sense of the index input is normal
+                - QEI_INVINX_EN: inverts the sense of the index input
+  ptr:  LPC1769 memory address where structure is stored. Use this in place of
+        the C reference operator (&).
+  
+  '''
+  pass
 
 class QEI_RELOADCFG_Type(cstruct):
-	pass
+  '''Timer Reload Configuration structure type definition.
+  
+   ReloadOption: Velocity Timer Reload Option, should be:
+                - QEI_TIMERRELOAD_TICKVAL: Reload value in absolute value
+                - QEI_TIMERRELOAD_USVAL: Reload value in microsecond value
+  ReloadValue:  Velocity Timer Reload Value, 32-bit long, should be matched
+                with Velocity Timer Reload Option
+  ptr:  LPC1769 memory address where structure is stored. Use this in place of
+        the C reference operator (&).
+        
+  '''
+  pass
 
 def QEI_GetTimer(QEIx):
-	return robocaller("QEI_GetTimer", "uint32_t", QEIx)
+  '''Get current timer counter in QEI peripheral.
+  
+  QEIx: QEI peripheral, should be LPC_QEI
+  return: Current timer counter in QEI peripheral
+  
+  '''
+  return robocaller("QEI_GetTimer", "uint32_t", QEIx)
 
 def QEI_DeInit(QEIx):
-	return robocaller("QEI_DeInit", "void", QEIx)
+  '''De-initializes the QEI peripheral registers to their default reset values.
+  
+  QEIx: QEI peripheral, should be LPC_QEI
+  
+  '''
+ return robocaller("QEI_DeInit", "void", QEIx)
 
 def QEI_GetPosition(QEIx):
-	return robocaller("QEI_GetPosition", "uint32_t", QEIx)
+  '''Get current position value in QEI peripheral.
+  
+  QEIx: QEI peripheral, should be LPC_QEI
+  return: Current position value of QEI peripheral
+  
+  '''
+  return robocaller("QEI_GetPosition", "uint32_t", QEIx)
 
 def QEI_GetStatus(QEIx, ulFlagType):
-	return robocaller("QEI_GetStatus", "FlagStatus", QEIx, ulFlagType)
+  '''Check whether if specified flag status is set or not.
+  
+  QEIx: QEI peripheral, should be LPC_QEI
+  ulFlagType: Status Flag Type, should be one of the following:
+              - QEI_STATUS_DIR: Direction Status
+  return: New Status of this status flag (SET or RESET)
+  
+  '''
+  return robocaller("QEI_GetStatus", "FlagStatus", QEIx, ulFlagType)
 
 def QEI_Reset(QEIx, ulResetType):
-	return robocaller("QEI_Reset", "void", QEIx, ulResetType)
+  '''Resets value for each type of QEI value, such as velocity, counter, 
+  position, etc.
+  
+  QEIx: QEI peripheral, should be LPC_QEI
+  ulResetType: QEI Reset Type, should be one of the following:
+              - QEI_RESET_POS: Reset Position Counter
+              - QEI_RESET_POSOnIDX: Reset Position Counter on Index signal
+              - QEI_RESET_VEL: Reset Velocity
+              - QEI_RESET_IDX: Reset Index Counter
+  
+  '''
+  return robocaller("QEI_Reset", "void", QEIx, ulResetType)
 
 def QEI_SetMaxPosition(QEIx, ulMaxPos):
-	return robocaller("QEI_SetMaxPosition", "void", QEIx, ulMaxPos)
+  '''Set max position value for QEI peripheral.
+  
+  QEIx: QEI peripheral, should be LPC_QEI
+  ulMaxPos: Max position value to set
+  
+  '''
+ return robocaller("QEI_SetMaxPosition", "void", QEIx, ulMaxPos)
 
 def QEI_GetVelocity(QEIx):
-	return robocaller("QEI_GetVelocity", "uint32_t", QEIx)
+  '''Get current velocity pulse counter in current time period.
+  
+  QEIx: QEI peripheral, should be LPC_QEI
+  return: Current velocity pulse counter value
+  
+  '''
+  return robocaller("QEI_GetVelocity", "uint32_t", QEIx)
 
 def QEI_GetVelocityCap(QEIx):
-	return robocaller("QEI_GetVelocityCap", "uint32_t", QEIx)
+  '''Get the most recently measured velocity of the QEI. When the Velocity timer
+  in QEI is over-flow, the current velocity value will be loaded into Velocity 
+  Capture register..
+  
+  QEIx: QEI peripheral, should be LPC_QEI
+  return: The most recently measured velocity value
+  
+  '''
+  return robocaller("QEI_GetVelocityCap", "uint32_t", QEIx)
 
 def QEI_SetPositionComp(QEIx, bPosCompCh, ulPosComp):
-	return robocaller("QEI_SetPositionComp", "void", QEIx, bPosCompCh, ulPosComp)
+  '''Set position compare value for QEI peripheral.
+  
+  QEIx: QEI peripheral, should be LPC_QEI
+  bPosCompCh: Compare Position channel, should be:
+               - QEI_COMPPOS_CH_0: QEI compare position channel 0
+               - QEI_COMPPOS_CH_1: QEI compare position channel 1
+               - QEI_COMPPOS_CH_2: QEI compare position channel 2
+  ulPosComp:  Compare Position value to set
+    
+  '''
+  return robocaller("QEI_SetPositionComp", "void", QEIx, bPosCompCh, ulPosComp)
 
 def QEI_SetDigiFilter(QEIx, ulSamplingPulse):
-	return robocaller("QEI_SetDigiFilter", "void", QEIx, ulSamplingPulse)
+  '''Set value of sampling count for the digital filter in QEI peripheral.
+  
+  QEIx: QEI peripheral, should be LPC_QEI
+  ulSamplingPulse: Value of sampling count to set
+  
+  '''
+  return robocaller("QEI_SetDigiFilter", "void", QEIx, ulSamplingPulse)
 
 def QEI_IntSet(QEIx, ulIntType):
-	return robocaller("QEI_IntSet", "void", QEIx, ulIntType)
+  '''Sets (forces) specified interrupt in QEI peripheral.
+  
+  QEIx: QEI peripheral, should be LPC_QEI
+  ulIntType:  Interrupt Flag Status type, should be:
+              - QEI_INTFLAG_INX_Int: index pulse was detected interrupt
+              - QEI_INTFLAG_TIM_Int: Velocity timer over flow interrupt
+              - QEI_INTFLAG_VELC_Int: Capture velocity is less than compare
+                interrupt
+              - QEI_INTFLAG_DIR_Int: Change of direction interrupt
+              - QEI_INTFLAG_ERR_Int: An encoder phase error interrupt
+              - QEI_INTFLAG_ENCLK_Int: An encoder clock pulse was detected
+                interrupt
+              - QEI_INTFLAG_POS0_Int: position 0 compare value is equal to the
+                current position interrupt
+              - QEI_INTFLAG_POS1_Int: position 1 compare value is equal to the
+                current position interrupt
+              - QEI_INTFLAG_POS2_Int: position 2 compare value is equal to the
+                current position interrupt
+              - QEI_INTFLAG_REV_Int: Index compare value is equal to the current
+                index count interrupt
+              - QEI_INTFLAG_POS0REV_Int: Combined position 0 and revolution 
+                count interrupt
+              - QEI_INTFLAG_POS1REV_Int: Combined position 1 and revolution 
+                count interrupt
+              - QEI_INTFLAG_POS2REV_Int: Combined position 2 and revolution 
+                count interrupt
+  
+  '''
+  return robocaller("QEI_IntSet", "void", QEIx, ulIntType)
 
 def QEI_GetIndex(QEIx):
-	return robocaller("QEI_GetIndex", "uint32_t", QEIx)
+  '''Get current index counter of QEI peripheral.
+  
+  QEIx: QEI peripheral, should be LPC_QEI
+  return: Current value of QEI index counter
+  
+  '''
+  return robocaller("QEI_GetIndex", "uint32_t", QEIx)
 
 def QEI_SetTimerReload(QEIx, QEIReloadStruct):
-	return robocaller("QEI_SetTimerReload", "void", QEIx, QEIReloadStruct)
+  '''Set timer reload value for QEI peripheral. When the velocity timer is
+  over-flow, the value that set for Timer Reload register will be loaded
+  into the velocity timer for next period. The calculated velocity in RPM
+  therefore will be affect by this value..
+  
+  QEIx: QEI peripheral, should be LPC_QEI
+  QEIReloadStruct: QEI reload structure
+  
+  '''
+ return robocaller("QEI_SetTimerReload", "void", QEIx, QEIReloadStruct)
 
 def QEI_ConfigStructInit(QIE_InitStruct):
-	return robocaller("QEI_ConfigStructInit", "void", QIE_InitStruct)
+  '''Fills each QIE_InitStruct member with its default value.
+  
+  - DirectionInvert = QEI_DIRINV_NONE
+  - SignalMode = QEI_SIGNALMODE_QUAD
+  - CaptureMode = QEI_CAPMODE_4X
+  - InvertIndex = QEI_INVINX_NONE.
+  
+  QIE_InitStruct: Pointer to a QEI_CFG_Type structure which will be 
+                  initialized.
+  
+  '''
+  return robocaller("QEI_ConfigStructInit", "void", QIE_InitStruct)
 
 def QEI_SetVelocityComp(QEIx, ulVelComp):
-	return robocaller("QEI_SetVelocityComp", "void", QEIx, ulVelComp)
+  '''Set Velocity Compare value for QEI peripheral.
+  
+  QEIx: QEI peripheral, should be LPC_QEI
+  ulVelComp:  Compare Velocity value to set
+    
+  '''
+  return robocaller("QEI_SetVelocityComp", "void", QEIx, ulVelComp)
 
 def QEI_Init(QEIx, QEI_ConfigStruct):
-	return robocaller("QEI_Init", "void", QEIx, QEI_ConfigStruct)
+  '''Initializes the QEI peripheral according to the specified parameters in the
+  QEI_ConfigStruct.
+  
+  QEIx: QEI peripheral, should be LPC_QEI
+  QEI_ConfigStruct: Pointer to a QEI_CFG_Type structure that contains the 
+                    configuration information for the specified QEI peripheral
+    
+  '''
+  return robocaller("QEI_Init", "void", QEIx, QEI_ConfigStruct)
 
 def QEI_IntCmd(QEIx, ulIntType, NewState):
-	return robocaller("QEI_IntCmd", "void", QEIx, ulIntType, NewState)
+  '''Enable/Disable specified interrupt in QEI peripheral.
+  
+  QEIx: QEI peripheral, should be LPC_QEI
+  ulIntType:  Interrupt Flag Status type, should be:
+              - QEI_INTFLAG_INX_Int: index pulse was detected interrupt
+              - QEI_INTFLAG_TIM_Int: Velocity timer over flow interrupt
+              - QEI_INTFLAG_VELC_Int: Capture velocity is less than compare
+                interrupt
+              - QEI_INTFLAG_DIR_Int: Change of direction interrupt
+              - QEI_INTFLAG_ERR_Int: An encoder phase error interrupt
+              - QEI_INTFLAG_ENCLK_Int: An encoder clock pulse was detected
+                interrupt
+              - QEI_INTFLAG_POS0_Int: position 0 compare value is equal to the
+                current position interrupt
+              - QEI_INTFLAG_POS1_Int: position 1 compare value is equal to the
+                current position interrupt
+              - QEI_INTFLAG_POS2_Int: position 2 compare value is equal to the
+                current position interrupt
+              - QEI_INTFLAG_REV_Int: Index compare value is equal to the current
+                index count interrupt
+              - QEI_INTFLAG_POS0REV_Int: Combined position 0 and revolution 
+                count interrupt
+              - QEI_INTFLAG_POS1REV_Int: Combined position 1 and revolution 
+                count interrupt
+              - QEI_INTFLAG_POS2REV_Int: Combined position 2 and revolution 
+                count interrupt
+  NewState: New function state, should be:
+            - DISABLE
+            - ENABLE
+  
+  '''
+  return robocaller("QEI_IntCmd", "void", QEIx, ulIntType, NewState)
 
 def QEI_IntClear(QEIx, ulIntType):
-	return robocaller("QEI_IntClear", "void", QEIx, ulIntType)
+  '''Clear (force) specified interrupt (pending) in QEI peripheral.
+  
+  QEIx: QEI peripheral, should be LPC_QEI
+  ulIntType:  Interrupt Flag Status type, should be:
+              - QEI_INTFLAG_INX_Int: index pulse was detected interrupt
+              - QEI_INTFLAG_TIM_Int: Velocity timer over flow interrupt
+              - QEI_INTFLAG_VELC_Int: Capture velocity is less than compare
+                interrupt
+              - QEI_INTFLAG_DIR_Int: Change of direction interrupt
+              - QEI_INTFLAG_ERR_Int: An encoder phase error interrupt
+              - QEI_INTFLAG_ENCLK_Int: An encoder clock pulse was detected
+                interrupt
+              - QEI_INTFLAG_POS0_Int: position 0 compare value is equal to the
+                current position interrupt
+              - QEI_INTFLAG_POS1_Int: position 1 compare value is equal to the
+                current position interrupt
+              - QEI_INTFLAG_POS2_Int: position 2 compare value is equal to the
+                current position interrupt
+              - QEI_INTFLAG_REV_Int: Index compare value is equal to the current
+                index count interrupt
+              - QEI_INTFLAG_POS0REV_Int: Combined position 0 and revolution 
+                count interrupt
+              - QEI_INTFLAG_POS1REV_Int: Combined position 1 and revolution 
+                count interrupt
+              - QEI_INTFLAG_POS2REV_Int: Combined position 2 and revolution 
+                count interrupt
+  
+  '''
+  return robocaller("QEI_IntClear", "void", QEIx, ulIntType)
 
 def QEI_GetIntStatus(QEIx, ulIntType):
-	return robocaller("QEI_GetIntStatus", "FlagStatus", QEIx, ulIntType)
+  '''Check whether if specified interrupt flag status in QEI peripheral
+  is set or not.
+  
+  QEIx: QEI peripheral, should be LPC_QEI
+  ulIntType:  Interrupt Flag Status type, should be:
+              - QEI_INTFLAG_INX_Int: index pulse was detected interrupt
+              - QEI_INTFLAG_TIM_Int: Velocity timer over flow interrupt
+              - QEI_INTFLAG_VELC_Int: Capture velocity is less than compare
+                interrupt
+              - QEI_INTFLAG_DIR_Int: Change of direction interrupt
+              - QEI_INTFLAG_ERR_Int: An encoder phase error interrupt
+              - QEI_INTFLAG_ENCLK_Int: An encoder clock pulse was detected
+                interrupt
+              - QEI_INTFLAG_POS0_Int: position 0 compare value is equal to the
+                current position interrupt
+              - QEI_INTFLAG_POS1_Int: position 1 compare value is equal to the
+                current position interrupt
+              - QEI_INTFLAG_POS2_Int: position 2 compare value is equal to the
+                current position interrupt
+              - QEI_INTFLAG_REV_Int: Index compare value is equal to the current
+                index count interrupt
+              - QEI_INTFLAG_POS0REV_Int: Combined position 0 and revolution 
+                count interrupt
+              - QEI_INTFLAG_POS1REV_Int: Combined position 1 and revolution 
+                count interrupt
+              - QEI_INTFLAG_POS2REV_Int: Combined position 2 and revolution 
+                count interrupt 
+  return: New State of specified interrupt flag status (SET or RESET)
+  
+  '''
+  return robocaller("QEI_GetIntStatus", "FlagStatus", QEIx, ulIntType)
 
 def QEI_CalculateRPM(QEIx, ulVelCapValue, ulPPR):
-	return robocaller("QEI_CalculateRPM", "uint32_t", QEIx, ulVelCapValue, ulPPR)
+  '''Calculates the actual velocity in RPM passed via velocity capture value and
+  Pulse Per Round (of the encoder) value parameter input.
+  
+  QEIx: QEI peripheral, should be LPC_QEI
+  ulVelCapValue:  Velocity capture input value from QEI_GetVelocityCap() 
+                  function
+  ulPPR:  Pulse per round of encoder
+  return: The actual value of velocity in RPM (revolutions per minute)
+  
+  '''
+  return robocaller("QEI_CalculateRPM", "uint32_t", QEIx, ulVelCapValue, ulPPR)
 
 def QEI_SetIndexComp(QEIx, ulIndexComp):
-	return robocaller("QEI_SetIndexComp", "void", QEIx, ulIndexComp)
-
+  '''Set value for index compare in QEI peripheral.
+  
+  QEIx: QEI peripheral, should be LPC_QEI
+  ulIndexComp:  Compare Index Value to set
+  
+  '''
+  return robocaller("QEI_SetIndexComp", "void", QEIx, ulIndexComp)
