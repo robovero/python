@@ -107,7 +107,7 @@ class SPI_CFG_Type(cstruct):
               - SPI_DATA_LSB_FIRST: LSB first
   ClockRate:  Clock rate,in Hz, should not exceed  (SPI peripheral clock)/8
   ptr:  LPC1769 memory address where structure is stored. Use this in place of
-  the C reference operator (&).
+        the C reference operator (&).
   
   '''
   pass
@@ -121,7 +121,7 @@ class SPI_DATA_SETUP_Type(cstruct):
   counter:  Data counter index
   status: Current status of SPI activity
   ptr:  LPC1769 memory address where structure is stored. Use this in place of
-  the C reference operator (&).
+        the C reference operator (&).
   
   '''
   pass
