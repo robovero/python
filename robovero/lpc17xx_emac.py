@@ -727,7 +727,7 @@ def EMAC_Init(EMAC_ConfigStruct):
 def EMAC_CheckReceiveDataStatus(ulRxStatType):
   '''Get current status value of receive data (due to RxConsumeIndex).
   
-  ulRxStatType: ulRxStatType	Received Status type, should be one of following:
+  ulRxStatType: Received Status type, should be one of following:
                 EMAC_RINFO_CTRL_FRAME: Control Frame
                 EMAC_RINFO_VLAN: VLAN Frame
                 EMAC_RINFO_FAIL_FILT: RX Filter Failed

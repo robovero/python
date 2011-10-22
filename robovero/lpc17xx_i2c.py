@@ -209,14 +209,14 @@ class I2C_M_SETUP_Type(cstruct):
 class I2C_OWNSLAVEADDR_CFG_Type(cstruct):
   '''I2C Own slave address setting structure.
   
- 	SlaveAddrChannel: Slave Address channel in I2C control, should be in range
+  SlaveAddrChannel: Slave Address channel in I2C control, should be in range
                     from 0..3
-	SlaveAddr_7bit: Value of 7-bit slave address
-	GeneralCallState: Enable/Disable General Call Functionality when I2C control 
+  SlaveAddr_7bit: Value of 7-bit slave address
+  GeneralCallState: Enable/Disable General Call Functionality when I2C control 
                     being in Slave mode, should be:
                     ENABLE: Enable General Call function.
                     DISABLE: Disable General Call function.
-	SlaveAddrMaskValue: Any bit in this 8-bit value (bit 7:1) which is set to '1'
+  SlaveAddrMaskValue: Any bit in this 8-bit value (bit 7:1) which is set to '1'
                       will cause an automatic compare on the corresponding bit
                       of the received address when it is compared to the 
                       SlaveAddr_7bit value associated with this mask register.

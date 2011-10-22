@@ -524,8 +524,8 @@ def PARAM_ID_FORMAT(n):
 def PARAM_GRP_ID(x, y):
   '''Macro to check Group identifier.
   '''
-	return ((x<=y))
-	
+  return ((x<=y))
+  
 def PARAM_FRAME_TYPE(n):
   '''Macro to check Frame type.
   '''
@@ -535,9 +535,9 @@ def PARAM_CTRL_STS_TYPE(n):
   '''Macro to check Control/Central Status type parameter.
   '''
   return  (
-		(n==CANCTRL_GLOBAL_STS) or (n==CANCTRL_INT_CAP)  
-		or (n==CANCTRL_ERR_WRN) or (n==CANCTRL_STS)
-		)
+    (n==CANCTRL_GLOBAL_STS) or (n==CANCTRL_INT_CAP)  
+    or (n==CANCTRL_ERR_WRN) or (n==CANCTRL_STS)
+    )
 
 def PARAM_CR_STS_TYPE(n):
   '''Macro to check CR status type.
@@ -548,19 +548,19 @@ def PARAM_AFMODE_TYPE(n):
   '''Macro to check AF Mode type parameter.
   '''
   return  (
-		(n==CAN_Normal) or (n==CAN_AccOff)  
-		or (n==CAN_AccBP) or (n==CAN_eFCAN)
-		)
+    (n==CAN_Normal) or (n==CAN_AccOff)  
+    or (n==CAN_AccBP) or (n==CAN_eFCAN)
+    )
 
 def PARAM_MODE_TYPE(n):
   '''Macro to check Operation Mode.
   '''
   return  (
-		(n==CAN_OPERATING_MODE) or (n==CAN_RESET_MODE)  
-		or (n==CAN_LISTENONLY_MODE) or (n==CAN_SELFTEST_MODE)  
-		or (n==CAN_TXPRIORITY_MODE) or (n==CAN_SLEEP_MODE)  
-		or (n==CAN_RXPOLARITY_MODE) or (n==CAN_TEST_MODE)
-		)
+    (n==CAN_OPERATING_MODE) or (n==CAN_RESET_MODE)  
+    or (n==CAN_LISTENONLY_MODE) or (n==CAN_SELFTEST_MODE)  
+    or (n==CAN_TXPRIORITY_MODE) or (n==CAN_SLEEP_MODE)  
+    or (n==CAN_RXPOLARITY_MODE) or (n==CAN_TEST_MODE)
+    )
 
 def PARAM_CTRL(n):
   '''Macro define for struct AF_Section parameter.
@@ -576,22 +576,22 @@ def PARAM_INT_EN_TYPE(n):
   '''Macro to check Interrupt Type parameter.
   '''
   return  (
-		(n==CANINT_RIE) or (n==CANINT_TIE1)  
-		or (n==CANINT_EIE) or (n==CANINT_DOIE)  
-		or (n==CANINT_WUIE) or (n==CANINT_EPIE)  
-		or (n==CANINT_ALIE) or (n==CANINT_BEIE)  
-		or (n==CANINT_IDIE) or (n==CANINT_TIE2)  
-		or (n==CANINT_TIE3) or (n==CANINT_FCE)
-		)
+    (n==CANINT_RIE) or (n==CANINT_TIE1)  
+    or (n==CANINT_EIE) or (n==CANINT_DOIE)  
+    or (n==CANINT_WUIE) or (n==CANINT_EPIE)  
+    or (n==CANINT_ALIE) or (n==CANINT_BEIE)  
+    or (n==CANINT_IDIE) or (n==CANINT_TIE2)  
+    or (n==CANINT_TIE3) or (n==CANINT_FCE)
+    )
 
 def PARAM_AFLUT_ENTRY_TYPE(n):
   '''Macro to check AFLUT Entry type.
   '''
   return  (
-		(n==FULLCAN_ENTRY) or (n==EXPLICIT_STANDARD_ENTRY) 
-		or (n==GROUP_STANDARD_ENTRY) or (n==EXPLICIT_EXTEND_ENTRY)  
-		or (n==GROUP_EXTEND_ENTRY)
-		)
+    (n==FULLCAN_ENTRY) or (n==EXPLICIT_STANDARD_ENTRY) 
+    or (n==GROUP_STANDARD_ENTRY) or (n==EXPLICIT_EXTEND_ENTRY)  
+    or (n==GROUP_EXTEND_ENTRY)
+    )
 
 def PARAM_POSITION(n):
   '''Macro to check position.
@@ -614,7 +614,7 @@ class SFF_Entry(cstruct):
         the C reference operator (&).
         
   '''
-	pass
+  pass
 
 class CAN_MSG_Type(cstruct):
   '''CAN message object structure.
@@ -637,76 +637,76 @@ class CAN_MSG_Type(cstruct):
         the C reference operator (&).
         
   '''
-	pass		
+  pass    
 
 class CAN_ERROR:
   '''Error values that functions can return.
   '''
   # No error
-	CAN_OK = 1
+  CAN_OK = 1
   # No more rx or tx objects available
-	CAN_OBJECTS_FULL_ERROR = 1
+  CAN_OBJECTS_FULL_ERROR = 1
   # Full CAN object not received
-	CAN_FULL_OBJ_NOT_RCV = 2
+  CAN_FULL_OBJ_NOT_RCV = 2
   # No receive data available
-	CAN_NO_RECEIVE_DATA = 3
+  CAN_NO_RECEIVE_DATA = 3
   # Entry load in AFLUT is unvalid
-	CAN_AF_ENTRY_ERROR = 4
+  CAN_AF_ENTRY_ERROR = 4
   # ID Conflict
-	CAN_CONFLICT_ID_ERROR = 5
+  CAN_CONFLICT_ID_ERROR = 5
   # Entry not exit
-	CAN_ENTRY_NOT_EXIT_ERROR = 6
+  CAN_ENTRY_NOT_EXIT_ERROR = 6
 
 class CAN_AFMODE_Type:
   '''Acceptance Filter Mode type definition.
   '''
   # Normal Mode
-	CAN_Normal = 0
+  CAN_Normal = 0
   # Acceptance Filter Off Mode
-	CAN_AccOff = 1
+  CAN_AccOff = 1
   # Acceptance Fileter Bypass Mode
-	CAN_AccBP = 2
+  CAN_AccBP = 2
   # FullCAN Mode Enhancement
-	CAN_eFCAN = 3
+  CAN_eFCAN = 3
 
 class CAN_CR_STS_Type:
   '''Central CAN status type definition.
   '''
   # Central CAN Tx Status
-	CANCR_TX_STS = 0
+  CANCR_TX_STS = 0
   # Central CAN Rx Status
-	CANCR_RX_STS = 1
+  CANCR_RX_STS = 1
   # Central CAN Miscellaneous Status
-	CANCR_MS = 2
+  CANCR_MS = 2
 
 class CAN_CTRL_STS_Type:
   '''CAN Control status definition.
   '''
   # CAN Global Status
-	CANCTRL_GLOBAL_STS = 0
+  CANCTRL_GLOBAL_STS = 0
   # CAN Interrupt and Capture
-	CANCTRL_INT_CAP = 1
+  CANCTRL_INT_CAP = 1
   # CAN Error Warning Limit
-	CANCTRL_ERR_WRN = 2
+  CANCTRL_ERR_WRN = 2
   # CAN Control Status
-	CANCTRL_STS = 3
+  CANCTRL_STS = 3
 
 class AFLUT_ENTRY_Type:
   '''AFLUT Entry type definition.
   '''
-	FULLCAN_ENTRY = 0
-	EXPLICIT_STANDARD_ENTRY = 1
-	GROUP_STANDARD_ENTRY = 2
-	EXPLICIT_EXTEND_ENTRY = 3
-	GROUP_EXTEND_ENTRY = 4
+  FULLCAN_ENTRY = 0
+  EXPLICIT_STANDARD_ENTRY = 1
+  GROUP_STANDARD_ENTRY = 2
+  EXPLICIT_EXTEND_ENTRY = 3
+  GROUP_EXTEND_ENTRY = 4
 
 class CAN_ID_FORMAT_Type:
   '''CAN ID format definition.
   '''
   # Use standard ID format (11 bit ID)
-	STD_ID_FORMAT = 0
+  STD_ID_FORMAT = 0
   # Use extended ID format (29 bit ID)
-	EXT_ID_FORMAT = 1
+  EXT_ID_FORMAT = 1
 
 class FullCAN_Entry(cstruct):
   '''FullCAN Entry structure.
@@ -722,7 +722,7 @@ class FullCAN_Entry(cstruct):
         the C reference operator (&).
         
   '''
-	pass
+  pass
 
 class EFF_GPR_Entry(cstruct):
   ''' Group of Extended ID Frame Format Entry structure.
@@ -739,35 +739,35 @@ class EFF_GPR_Entry(cstruct):
         the C reference operator (&).
         
   '''
-	pass
+  pass
 
 class CAN_INT_EN_Type:
   '''CAN interrupt enable type definition.
   '''
   # CAN Receiver Interrupt Enable
-	CANINT_RIE = 0
+  CANINT_RIE = 0
   # CAN Transmit Interrupt Enable
-	CANINT_TIE1 = 1
+  CANINT_TIE1 = 1
   # CAN Error Warning Interrupt Enable
-	CANINT_EIE = 2
+  CANINT_EIE = 2
   # CAN Data Overrun Interrupt Enable
-	CANINT_DOIE = 3
+  CANINT_DOIE = 3
   # CAN Wake-Up Interrupt Enable
-	CANINT_WUIE = 4
+  CANINT_WUIE = 4
   # CAN Error Passive Interrupt Enable
-	CANINT_EPIE = 5
+  CANINT_EPIE = 5
   # CAN Arbitration Lost Interrupt Enable
-	CANINT_ALIE = 6
+  CANINT_ALIE = 6
   # CAN Bus Error Interrupt Enable
-	CANINT_BEIE = 7
+  CANINT_BEIE = 7
   # CAN ID Ready Interrupt Enable
-	CANINT_IDIE = 8
+  CANINT_IDIE = 8
   # CAN Transmit Interrupt Enable for Buffer2
-	CANINT_TIE2 = 9
+  CANINT_TIE2 = 9
   # CAN Transmit Interrupt Enable for Buffer3
-	CANINT_TIE3 = 10
+  CANINT_TIE3 = 10
   # FullCAN Interrupt Enable
-	CANINT_FCE = 11
+  CANINT_FCE = 11
 
 class CAN_PinCFG_Type(cstruct):
   '''Pin Configuration structure.
@@ -788,23 +788,23 @@ class CAN_PinCFG_Type(cstruct):
         the C reference operator (&).
         
   '''
-	pass
+  pass
 
 class CAN_FRAME_Type:
   '''Symbolic names for type of CAN message.
   '''
   # Data frame
-	DATA_FRAME = 0
+  DATA_FRAME = 0
   # Remote frame
-	REMOTE_FRAME = 1
+  REMOTE_FRAME = 1
 
 class FullCAN_IC_Type:
   '''FullCAN Interrupt Capture type definition.
   '''
   # FullCAN Interrupt and Capture 0
-	FULLCAN_IC0 = 0
+  FULLCAN_IC0 = 0
   # FullCAN Interrupt and Capture 1
-	FULLCAN_IC1 = 1
+  FULLCAN_IC1 = 1
 
 class SFF_GPR_Entry(cstruct):
   '''Group of Standard ID Frame Format Entry structure.
@@ -828,27 +828,27 @@ class SFF_GPR_Entry(cstruct):
         the C reference operator (&).
         
   '''
-	pass
+  pass
 
 class CAN_MODE_Type:
   '''CAN Mode Type definition.
   '''
   # Operating Mode
-	CAN_OPERATING_MODE = 0
+  CAN_OPERATING_MODE = 0
   # Reset Mode
-	CAN_RESET_MODE = 1
+  CAN_RESET_MODE = 1
   # Listen Only Mode
-	CAN_LISTENONLY_MODE = 2
+  CAN_LISTENONLY_MODE = 2
   # Self Test Mode
-	CAN_SELFTEST_MODE = 3
+  CAN_SELFTEST_MODE = 3
   # Transmit Priority Mode
-	CAN_TXPRIORITY_MODE = 4
+  CAN_TXPRIORITY_MODE = 4
   # Sleep Mode
-	CAN_SLEEP_MODE = 5
+  CAN_SLEEP_MODE = 5
   # Receive Polarity Mode
-	CAN_RXPOLARITY_MODE = 6
+  CAN_RXPOLARITY_MODE = 6
   # Test Mode
-	CAN_TEST_MODE = 7
+  CAN_TEST_MODE = 7
 
 class EFF_Entry(cstruct):
   '''Extended ID Frame Format Entry structure.
@@ -861,7 +861,7 @@ class EFF_Entry(cstruct):
         the C reference operator (&).
         
   '''
-	pass
+  pass
 
 class AF_SectionDef(cstruct):
   '''Acceptance Filter Section Table structure.
@@ -880,7 +880,7 @@ class AF_SectionDef(cstruct):
         the C reference operator (&).
         
   '''
-	pass
+  pass
 
 def CAN_SetCommand(CANx, CMRType):
   '''Set CAN command request.
@@ -888,7 +888,7 @@ def CAN_SetCommand(CANx, CMRType):
   CANx: pointer to CAN peripheral selected, should be:
         LPC_CAN1: CAN1 peripheral
         LPC_CAN2: CAN2 peripheral
-  CMRType:	command request type, should be:
+  CMRType:  command request type, should be:
             CAN_CMR_TR: Transmission request
             CAN_CMR_AT: Abort Transmission request
             CAN_CMR_RRB: Release Receive Buffer request
@@ -899,7 +899,7 @@ def CAN_SetCommand(CANx, CMRType):
             CAN_CMR_STB3: Select Tx Buffer 3 request
   return: CANICR (CAN interrupt and Capture register) value
   '''
-	return robocaller("CAN_SetCommand", "void", CANx, CMRType)
+  return robocaller("CAN_SetCommand", "void", CANx, CMRType)
 
 def CAN_IRQCmd(CANx, arg, NewState):
   '''Enable/Disable CAN Interrupt.
@@ -923,7 +923,7 @@ def CAN_IRQCmd(CANx, arg, NewState):
   NewState: New state of this function, should be: ENABLE or DISABLE
   
   '''
-	return robocaller("CAN_IRQCmd", "void", CANx, arg, NewState)
+  return robocaller("CAN_IRQCmd", "void", CANx, arg, NewState)
 
 def FCAN_ReadObj(CANAFx, CAN_Msg):
   '''Receive FullCAN Object.
@@ -935,7 +935,7 @@ def FCAN_ReadObj(CANAFx, CAN_Msg):
           CAN_FULL_OBJ_NOT_RCV: FullCAN Object is not be received
           CAN_OK: Received FullCAN Object successful
   '''
-	return robocaller("FCAN_ReadObj", "CAN_ERROR", CANAFx, CAN_Msg)
+  return robocaller("FCAN_ReadObj", "CAN_ERROR", CANAFx, CAN_Msg)
 
 def CAN_Init(CANx, baudrate):
   '''Initialize CAN peripheral with given baudrate.
@@ -946,7 +946,7 @@ def CAN_Init(CANx, baudrate):
   baudrate: the value of CAN baudrate will be set (bps)
   
   '''
-	return robocaller("CAN_Init", "void", CANx, baudrate)
+  return robocaller("CAN_Init", "void", CANx, baudrate)
 
 def CAN_ModeConfig(CANx, mode, NewState):
   '''Enable/Disable CAN Mode.
@@ -967,7 +967,7 @@ def CAN_ModeConfig(CANx, mode, NewState):
   NewState: New State of this function, should be: ENABLE or DISABLE
 
   '''
-	return robocaller("CAN_ModeConfig", "void", CANx, mode, NewState)
+  return robocaller("CAN_ModeConfig", "void", CANx, mode, NewState)
 
 def CAN_LoadExplicitEntry(CANx, ID, format):
   '''Add Explicit ID into AF Look-Up Table dynamically.
@@ -985,7 +985,7 @@ def CAN_LoadExplicitEntry(CANx, ID, format):
           CAN_OK: ID is added into table successfully
           
   '''
-	return robocaller("CAN_LoadExplicitEntry", "CAN_ERROR", CANx, ID, format)
+  return robocaller("CAN_LoadExplicitEntry", "CAN_ERROR", CANx, ID, format)
 
 def CAN_LoadFullCANEntry(CANx, ID):
   '''Load FullCAN entry into AFLUT.
@@ -999,7 +999,7 @@ def CAN_LoadFullCANEntry(CANx, ID):
           CAN_ID_EXIT_ERROR: ID exited in FullCAN Section
           CAN_OBJECTS_FULL_ERROR: no more space available
   '''
-	return robocaller("CAN_LoadFullCANEntry", "CAN_ERROR", CANx, ID)
+  return robocaller("CAN_LoadFullCANEntry", "CAN_ERROR", CANx, ID)
 
 def CAN_IntGetStatus(CANx):
   '''Get CAN interrupt status.
@@ -1010,7 +1010,7 @@ def CAN_IntGetStatus(CANx):
   return: CANICR (CAN interrupt and Capture register) value
   
   '''
-	return robocaller("CAN_IntGetStatus", "uint32_t", CANx)
+  return robocaller("CAN_IntGetStatus", "uint32_t", CANx)
 
 def CAN_SetAFMode(CANAFx, AFmode):
   '''Check if FullCAN interrupt enable or not.
@@ -1021,7 +1021,7 @@ def CAN_SetAFMode(CANAFx, AFmode):
           RESET: if FullCAN interrupt is disable
   
   '''
-	return robocaller("CAN_SetAFMode", "void", CANAFx, AFmode)
+  return robocaller("CAN_SetAFMode", "void", CANAFx, AFmode)
 
 def CAN_SendMsg(CANx, CAN_Msg):
   '''Send message data.
@@ -1036,7 +1036,7 @@ def CAN_SendMsg(CANx, CAN_Msg):
           ERROR: send message unsuccessfully
           
   '''
-	return robocaller("CAN_SendMsg", "Status", CANx, CAN_Msg)
+  return robocaller("CAN_SendMsg", "Status", CANx, CAN_Msg)
 
 def CAN_LoadGroupEntry(CANx, lowerID, upperID, format):
   '''Load Group entry into AFLUT.
@@ -1055,7 +1055,7 @@ def CAN_LoadGroupEntry(CANx, lowerID, upperID, format):
           CAN_OBJECTS_FULL_ERROR: no more space available
   
   '''
-	return robocaller("CAN_LoadGroupEntry", "CAN_ERROR", CANx, lowerID, upperID, format)
+  return robocaller("CAN_LoadGroupEntry", "CAN_ERROR", CANx, lowerID, upperID, format)
 
 def CAN_SetupAFLUT(CANAFx, AFSection):
   '''Setup Acceptance Filter Look-Up Table.
@@ -1063,12 +1063,12 @@ def CAN_SetupAFLUT(CANAFx, AFSection):
   CANAFx: pointer to LPC_CANAF_TypeDef object, should be: LPC_CANAF
   AFSection:  pointer to AF_SectionDef structure it contains information 
               about 5 sections will be install in AFLUT
-  return: CAN Error	could be:
+  return: CAN Error  could be:
           CAN_OBJECTS_FULL_ERROR: No more rx or tx objects available
           CAN_AF_ENTRY_ERROR: table error-violation of ascending numerical order
           CAN_OK: ID is added into table successfully
   '''
-	return robocaller("CAN_SetupAFLUT", "CAN_ERROR", CANAFx, AFSection)
+  return robocaller("CAN_SetupAFLUT", "CAN_ERROR", CANAFx, AFSection)
 
 def CAN_GetCTRLStatus(CANx, arg):
   '''Get CAN Control Status.
@@ -1083,7 +1083,7 @@ def CAN_GetCTRLStatus(CANx, arg):
   return: Current Control Status that you want to get value
   
   '''
-	return robocaller("CAN_GetCTRLStatus", "uint32_t", CANx, arg)
+  return robocaller("CAN_GetCTRLStatus", "uint32_t", CANx, arg)
 
 def CAN_DeInit(CANx):
   '''Deinitialize CAN module.
@@ -1093,7 +1093,7 @@ def CAN_DeInit(CANx):
         LPC_CAN2: CAN2 peripheral
   '''
   
-	return robocaller("CAN_DeInit", "void", CANx)
+  return robocaller("CAN_DeInit", "void", CANx)
 
 def CAN_ReceiveMsg(CANx, CAN_Msg):
   '''Receive message data.
@@ -1108,7 +1108,7 @@ def CAN_ReceiveMsg(CANx, CAN_Msg):
           ERROR: receive message unsuccessfully
           
   '''
-	return robocaller("CAN_ReceiveMsg", "Status", CANx, CAN_Msg)
+  return robocaller("CAN_ReceiveMsg", "Status", CANx, CAN_Msg)
 
 def CAN_FullCANPendGetStatus(CANAFx, ic_type):
   '''Get value of FullCAN interrupt and capture register.
@@ -1120,7 +1120,7 @@ def CAN_FullCANPendGetStatus(CANAFx, ic_type):
   return: FCANIC0 or FCANIC1 (FullCAN interrupt and Capture register) value
   
   '''
-	return robocaller("CAN_FullCANPendGetStatus", "uint32_t", CANAFx, ic_type)
+  return robocaller("CAN_FullCANPendGetStatus", "uint32_t", CANAFx, ic_type)
 
 def CAN_GetCRStatus(CANCRx, arg):
   '''Get CAN Central Status.
@@ -1133,7 +1133,7 @@ def CAN_GetCRStatus(CANCRx, arg):
   return: Current Central Status that you want to get value
   
   '''
-	return robocaller("CAN_GetCRStatus", "uint32_t", CANCRx, arg)
+  return robocaller("CAN_GetCRStatus", "uint32_t", CANCRx, arg)
 
 def CAN_RemoveEntry(EntryType, position):
   '''Remove AFLUT entry (FullCAN entry and Explicit Standard entry).
@@ -1150,7 +1150,7 @@ def CAN_RemoveEntry(EntryType, position):
           CAN_ENTRY_NOT_EXIT_ERROR: removal failed
           
   '''
-	return robocaller("CAN_RemoveEntry", "CAN_ERROR", EntryType, position)
+  return robocaller("CAN_RemoveEntry", "CAN_ERROR", EntryType, position)
 
 def CAN_FullCANIntGetStatus(CANAFx):
   '''Check if FullCAN interrupt enable or not.
@@ -1161,5 +1161,5 @@ def CAN_FullCANIntGetStatus(CANAFx):
           RESET: if FullCAN interrupt is disable
   
   '''
-	return robocaller("CAN_FullCANIntGetStatus", "IntStatus", CANAFx)
+  return robocaller("CAN_FullCANIntGetStatus", "IntStatus", CANAFx)
 

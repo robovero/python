@@ -23,51 +23,51 @@ RTC_IRL_RTCALF = (2)
 class RTC_INT_OPT:
   '''RTC interrupt source.
   
-	RTC_INT_COUNTER_INCREASE: Counter Increment Interrupt
-	RTC_INT_ALARM = RTC_IRL_RTCALF: The alarm interrupt
+  RTC_INT_COUNTER_INCREASE: Counter Increment Interrupt
+  RTC_INT_ALARM = RTC_IRL_RTCALF: The alarm interrupt
   
   '''
-	RTC_INT_COUNTER_INCREASE = RTC_IRL_RTCCIF
-	RTC_INT_ALARM = RTC_IRL_RTCALF
+  RTC_INT_COUNTER_INCREASE = RTC_IRL_RTCCIF
+  RTC_INT_ALARM = RTC_IRL_RTCALF
 
 class RTC_TIME_Type(cstruct):
   '''Time structure definitions for simple manipulation.
   
-	SEC:  Seconds Register
-	MIN:  Minutes Register
-	HOUR: Hours Register
-	DOM:  Day of Month Register
-	DOW:  Day of Week Register
-	DOY:  Day of Year Register
-	MONTH:  Months Register
-	YEAR: Years Register
+  SEC:  Seconds Register
+  MIN:  Minutes Register
+  HOUR: Hours Register
+  DOM:  Day of Month Register
+  DOW:  Day of Week Register
+  DOY:  Day of Year Register
+  MONTH:  Months Register
+  YEAR: Years Register
   ptr:  LPC1769 memory address where structure is stored. Use this in place of
   the C reference operator (&).
   
   '''
-	pass
+  pass
 
 class RTC_TIMETYPE_Num:
   '''RTC time type option.
   
-	RTC_TIMETYPE_SECOND:  Second
-	RTC_TIMETYPE_MINUTE:  Month
-	RTC_TIMETYPE_HOUR:  Hour
-	RTC_TIMETYPE_DAYOFWEEK: Day of week
-	RTC_TIMETYPE_DAYOFMONTH:  Day of month
-	RTC_TIMETYPE_DAYOFYEAR: Day of year
-	RTC_TIMETYPE_MONTH: Month
-	RTC_TIMETYPE_YEAR:  Year
+  RTC_TIMETYPE_SECOND:  Second
+  RTC_TIMETYPE_MINUTE:  Month
+  RTC_TIMETYPE_HOUR:  Hour
+  RTC_TIMETYPE_DAYOFWEEK: Day of week
+  RTC_TIMETYPE_DAYOFMONTH:  Day of month
+  RTC_TIMETYPE_DAYOFYEAR: Day of year
+  RTC_TIMETYPE_MONTH: Month
+  RTC_TIMETYPE_YEAR:  Year
   
   '''
-	RTC_TIMETYPE_SECOND = 0
-	RTC_TIMETYPE_MINUTE = 1
-	RTC_TIMETYPE_HOUR = 2
-	RTC_TIMETYPE_DAYOFWEEK = 3
-	RTC_TIMETYPE_DAYOFMONTH = 4
-	RTC_TIMETYPE_DAYOFYEAR = 5
-	RTC_TIMETYPE_MONTH = 6
-	RTC_TIMETYPE_YEAR = 7
+  RTC_TIMETYPE_SECOND = 0
+  RTC_TIMETYPE_MINUTE = 1
+  RTC_TIMETYPE_HOUR = 2
+  RTC_TIMETYPE_DAYOFWEEK = 3
+  RTC_TIMETYPE_DAYOFMONTH = 4
+  RTC_TIMETYPE_DAYOFYEAR = 5
+  RTC_TIMETYPE_MONTH = 6
+  RTC_TIMETYPE_YEAR = 7
 
 def RTC_CntIncrIntConfig(RTCx, CntIncrIntType, NewState):
   '''Enable/Disable Counter increment interrupt for each time type in RTC 
@@ -90,7 +90,7 @@ def RTC_CntIncrIntConfig(RTCx, CntIncrIntType, NewState):
               disabled                
                   
   '''
-	return robocaller("RTC_CntIncrIntConfig", "void", RTCx, CntIncrIntType, NewState)
+  return robocaller("RTC_CntIncrIntConfig", "void", RTCx, CntIncrIntType, NewState)
 
 def RTC_ClearIntPending(RTCx, IntType):
   '''Clear specified Location interrupt pending in RTC peripheral.
@@ -102,7 +102,7 @@ def RTC_ClearIntPending(RTCx, IntType):
             - RTC_INT_ALARM: Clear alarm interrupt pending
   
   '''
-	return robocaller("RTC_ClearIntPending", "void", RTCx, IntType)
+  return robocaller("RTC_ClearIntPending", "void", RTCx, IntType)
 
 def RTC_SetFullTime(RTCx, pFullTime):
   '''Set full of time in RTC peripheral.
@@ -112,7 +112,7 @@ def RTC_SetFullTime(RTCx, pFullTime):
               full.
   
   '''
-	return robocaller("RTC_SetFullTime", "void", RTCx, pFullTime)
+  return robocaller("RTC_SetFullTime", "void", RTCx, pFullTime)
 
 def RTC_SetAlarmTime(RTCx, Timetype, ALValue):
   '''Set alarm time value for each time type.
@@ -130,7 +130,7 @@ def RTC_SetAlarmTime(RTCx, Timetype, ALValue):
   ALValue:  Alarm time value to set
   
   '''
-	return robocaller("RTC_SetAlarmTime", "void", RTCx, Timetype, ALValue)
+  return robocaller("RTC_SetAlarmTime", "void", RTCx, Timetype, ALValue)
 
 def RTC_GetIntPending(RTCx, IntType):
   '''Check whether if specified Location interrupt in RTC peripheral is set or
@@ -143,7 +143,7 @@ def RTC_GetIntPending(RTCx, IntType):
             - RTC_INT_ALARM: Alarm generated an interrupt.
   
   '''
-	return robocaller("RTC_GetIntPending", "IntStatus", RTCx, IntType)
+  return robocaller("RTC_GetIntPending", "IntStatus", RTCx, IntType)
 
 def RTC_SetTime(RTCx, Timetype, TimeValue):
   '''Set current time value for each time type in RTC peripheral.
@@ -161,7 +161,7 @@ def RTC_SetTime(RTCx, Timetype, TimeValue):
   TimeValue:  Time value to set
   
   '''
-	return robocaller("RTC_SetTime", "void", RTCx, Timetype, TimeValue)
+  return robocaller("RTC_SetTime", "void", RTCx, Timetype, TimeValue)
 
 def RTC_GetFullAlarmTime(RTCx, pFullTime):
   '''Get full of alarm time in RTC peripheral.
@@ -171,7 +171,7 @@ def RTC_GetFullAlarmTime(RTCx, pFullTime):
               time in full.
   
   '''
-	return robocaller("RTC_GetFullAlarmTime", "void", RTCx, pFullTime)
+  return robocaller("RTC_GetFullAlarmTime", "void", RTCx, pFullTime)
 
 def RTC_DeInit(RTCx):
   '''De-initializes the RTC peripheral registers to their default reset values.
@@ -179,7 +179,7 @@ def RTC_DeInit(RTCx):
   RTCx: RTC peripheral selected, should be LPC_RTC
   
   '''
-	return robocaller("RTC_DeInit", "void", RTCx)
+  return robocaller("RTC_DeInit", "void", RTCx)
 
 def RTC_Init(RTCx):
   '''Initializes the RTC peripheral..
@@ -187,7 +187,7 @@ def RTC_Init(RTCx):
   RTCx: RTC peripheral selected, should be LPC_RTC
   
   '''
-	return robocaller("RTC_Init", "void", RTCx)
+  return robocaller("RTC_Init", "void", RTCx)
 
 def RTC_ReadGPREG(RTCx, Channel):
   '''Read value from General purpose registers.
@@ -202,7 +202,7 @@ def RTC_ReadGPREG(RTCx, Channel):
   return: Read Value
   
   '''
-	return robocaller("RTC_ReadGPREG", "uint32_t", RTCx, Channel)
+  return robocaller("RTC_ReadGPREG", "uint32_t", RTCx, Channel)
 
 def RTC_GetAlarmTime(RTCx, Timetype):
   '''Get alarm time value for each time type.
@@ -220,7 +220,7 @@ def RTC_GetAlarmTime(RTCx, Timetype):
   return: Value of Alarm time according to specified time type
   
   '''
-	return robocaller("RTC_GetAlarmTime", "uint32_t", RTCx, Timetype)
+  return robocaller("RTC_GetAlarmTime", "uint32_t", RTCx, Timetype)
 
 def RTC_AlarmIntConfig(RTCx, AlarmTimeType, NewState):
   '''Enable/Disable Alarm interrupt for each time type in RTC peripheral.
@@ -242,7 +242,7 @@ def RTC_AlarmIntConfig(RTCx, AlarmTimeType, NewState):
             - DISABLE: Alarm interrupt for this time type are disabled 
   
   '''
-	return robocaller("RTC_AlarmIntConfig", "void", RTCx, AlarmTimeType, NewState)
+  return robocaller("RTC_AlarmIntConfig", "void", RTCx, AlarmTimeType, NewState)
 
 def RTC_GetTime(RTCx, Timetype):
   '''Get current time value for each type time type.
@@ -260,7 +260,7 @@ def RTC_GetTime(RTCx, Timetype):
   return: Value of time according to specified time type
   
   '''
-	return robocaller("RTC_GetTime", "uint32_t", RTCx, Timetype)
+  return robocaller("RTC_GetTime", "uint32_t", RTCx, Timetype)
 
 def RTC_CalibCounterCmd(RTCx, NewState):
   '''Enable/Disable calibration counter in RTC peripheral.
@@ -271,7 +271,7 @@ def RTC_CalibCounterCmd(RTCx, NewState):
             - DISABLE: The calibration counter is disabled and reset to zero
   
   '''
-	return robocaller("RTC_CalibCounterCmd", "void", RTCx, NewState)
+  return robocaller("RTC_CalibCounterCmd", "void", RTCx, NewState)
 
 def RTC_GetFullTime(RTCx, pFullTime):
   '''Get full of time in RTC peripheral.
@@ -281,7 +281,7 @@ def RTC_GetFullTime(RTCx, pFullTime):
               full.
   
   '''
-	return robocaller("RTC_GetFullTime", "void", RTCx, pFullTime)
+  return robocaller("RTC_GetFullTime", "void", RTCx, pFullTime)
 
 def RTC_CalibConfig(RTCx, CalibValue, CalibDir):
   '''Configures Calibration in RTC peripheral.
@@ -293,7 +293,7 @@ def RTC_CalibConfig(RTCx, CalibValue, CalibDir):
             - RTC_CALIB_DIR_BACKWARD: Backward calibration
   
   '''
-	return robocaller("RTC_CalibConfig", "void", RTCx, CalibValue, CalibDir)
+  return robocaller("RTC_CalibConfig", "void", RTCx, CalibValue, CalibDir)
 
 def RTC_Cmd(RTCx, NewState):
   '''Start/Stop RTC peripheral.
@@ -304,7 +304,7 @@ def RTC_Cmd(RTCx, NewState):
             - DISABLE: The time counters are disabled
   
   '''
-	return robocaller("RTC_Cmd", "void", RTCx, NewState)
+  return robocaller("RTC_Cmd", "void", RTCx, NewState)
 
 def RTC_SetFullAlarmTime(RTCx, pFullTime):
   '''Set full of alarm time in RTC peripheral.
@@ -314,7 +314,7 @@ def RTC_SetFullAlarmTime(RTCx, pFullTime):
               value in full.
   
   '''
-	return robocaller("RTC_SetFullAlarmTime", "void", RTCx, pFullTime)
+  return robocaller("RTC_SetFullAlarmTime", "void", RTCx, pFullTime)
 
 def RTC_WriteGPREG(RTCx, Channel, Value):
   '''Write value to General purpose registers.
@@ -329,7 +329,7 @@ def RTC_WriteGPREG(RTCx, Channel, Value):
   Value:  Value to write
   
   '''
-	return robocaller("RTC_WriteGPREG", "void", RTCx, Channel, Value)
+  return robocaller("RTC_WriteGPREG", "void", RTCx, Channel, Value)
 
 def RTC_ResetClockTickCounter(RTCx):
   '''Reset clock tick counter in RTC peripheral.
@@ -337,4 +337,4 @@ def RTC_ResetClockTickCounter(RTCx):
   RTCx: RTC peripheral selected, should be LPC_RTC
   
   '''
-	return robocaller("RTC_ResetClockTickCounter", "void", RTCx)
+  return robocaller("RTC_ResetClockTickCounter", "void", RTCx)

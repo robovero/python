@@ -306,23 +306,23 @@ def PARAM_I2S_BITRATE(n):
 class I2S_CFG_Type(cstruct):
   '''I2S configuration structure definition.
   
-	wordwidth:  the number of bytes in data as follow:
+  wordwidth:  the number of bytes in data as follow:
               I2S_WORDWIDTH_8: 8 bit data
-							I2S_WORDWIDTH_16: 16 bit data
-							I2S_WORDWIDTH_32: 32 bit data
-	mono: Set mono/stereo mode, should be:
+              I2S_WORDWIDTH_16: 16 bit data
+              I2S_WORDWIDTH_32: 32 bit data
+  mono: Set mono/stereo mode, should be:
         I2S_STEREO: stereo mode
         I2S_MONO: mono mode
-	stop: Disables accesses on FIFOs, should be:
+  stop: Disables accesses on FIFOs, should be:
         I2S_STOP_ENABLE: enable stop mode
         I2S_STOP_DISABLE: disable stop mode
-	reset:  Asynchronously reset tje transmit channel and FIFO, should be:
+  reset:  Asynchronously reset tje transmit channel and FIFO, should be:
           I2S_RESET_ENABLE: enable reset mode
           I2S_RESET_DISABLE: disable reset mode
-	ws_sel: Set Master/Slave mode, should be:
+  ws_sel: Set Master/Slave mode, should be:
           I2S_MASTER_MODE: I2S master mode
           I2S_SLAVE_MODE: I2S slave mode
-	mute: MUTE mode: when true, the transmit channel sends only zeroes, shoule be:
+  mute: MUTE mode: when true, the transmit channel sends only zeroes, shoule be:
         I2S_MUTE_ENABLE: enable mute mode
         I2S_MUTE_DISABLE: disable mute mode
   ptr:  LPC1769 memory address where structure is stored. Use this in place of
@@ -347,13 +347,13 @@ class I2S_DMAConf_Type(cstruct):
 class I2S_MODEConf_Type(cstruct):
   '''I2S mode configuration structure definition.
   
-	clksel: Clock source selection, should be:
+  clksel: Clock source selection, should be:
           I2S_CLKSEL_FRDCLK: Select the fractional rate divider clock output
           I2S_CLKSEL_MCLK: Select the MCLK signal as the clock source
-	fpin: Select four pin mode, should be:
+  fpin: Select four pin mode, should be:
         I2S_4PIN_ENABLE: 4-pin enable
         I2S_4PIN_DISABLE: 4-pin disable
-	mcena:  Select MCLK mode, should be:
+  mcena:  Select MCLK mode, should be:
           I2S_MCLK_ENABLE: MCLK enable for output
           I2S_MCLK_DISABLE: MCLK disable for output
   ptr:  LPC1769 memory address where structure is stored. Use this in place of

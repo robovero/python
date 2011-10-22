@@ -45,8 +45,8 @@ class PWM_MATCHCFG_Type(cstruct):
 class PWM_TIMER_PRESCALE_OPT:
   '''PWM Timer/Counter prescale option.
   
-	PWM_TIMER_PRESCALE_TICKVAL: Prescale in absolute value
-	PWM_TIMER_PRESCALE_USVAL: Prescale in microsecond value
+  PWM_TIMER_PRESCALE_TICKVAL: Prescale in absolute value
+  PWM_TIMER_PRESCALE_USVAL: Prescale in microsecond value
   
   '''
   PWM_TIMER_PRESCALE_TICKVAL = 0
@@ -79,8 +79,8 @@ class PWM_TIMERCFG_Type(cstruct):
 class PWM_MATCH_UPDATE_OPT:
   '''PWM update type.
   
-	PWM_MATCH_UPDATE_NOW: PWM Match Channel Update Now
-	PWM_MATCH_UPDATE_NEXT_RST:  PWM Match Channel Update on next PWM Counter
+  PWM_MATCH_UPDATE_NOW: PWM Match Channel Update Now
+  PWM_MATCH_UPDATE_NEXT_RST:  PWM Match Channel Update on next PWM Counter
                               resetting
   
   '''
@@ -90,15 +90,15 @@ class PWM_MATCH_UPDATE_OPT:
 class PWM_INTSTAT_TYPE:
   '''PWM Interrupt status type.
   
-	PWM_INTSTAT_MR0:  Interrupt flag for PWM match channel 0
-	PWM_INTSTAT_MR1:  Interrupt flag for PWM match channel 1
-	PWM_INTSTAT_MR2:  Interrupt flag for PWM match channel 2
-	PWM_INTSTAT_MR3:  Interrupt flag for PWM match channel 3
-	PWM_INTSTAT_CAP0: Interrupt flag for capture input 0
-	PWM_INTSTAT_CAP1: Interrupt flag for capture input 1
-	PWM_INTSTAT_MR4:  Interrupt flag for PWM match channel 4
-	PWM_INTSTAT_MR6:  Interrupt flag for PWM match channel 5
-	PWM_INTSTAT_MR5:  Interrupt flag for PWM match channel 6
+  PWM_INTSTAT_MR0:  Interrupt flag for PWM match channel 0
+  PWM_INTSTAT_MR1:  Interrupt flag for PWM match channel 1
+  PWM_INTSTAT_MR2:  Interrupt flag for PWM match channel 2
+  PWM_INTSTAT_MR3:  Interrupt flag for PWM match channel 3
+  PWM_INTSTAT_CAP0: Interrupt flag for capture input 0
+  PWM_INTSTAT_CAP1: Interrupt flag for capture input 1
+  PWM_INTSTAT_MR4:  Interrupt flag for PWM match channel 4
+  PWM_INTSTAT_MR6:  Interrupt flag for PWM match channel 5
+  PWM_INTSTAT_MR5:  Interrupt flag for PWM match channel 6
     
   '''
   PWM_INTSTAT_MR0 = PWM_IR_PWMMRn(0)
@@ -126,14 +126,14 @@ class PWM_COUNTER_EDGE_OPT:
 class PWM_CAPTURECFG_Type(cstruct):
   '''PWM Capture Input configuration structure.
   
- 	CaptureChannel: Capture channel, should be in range from 0..1
-	RisingEdge: caption rising edge, should be:
-							- ENABLE: Enable rising edge.
-							- DISABLE: Disable this function.
-	FallingEdge:  caption falling edge, should be:
+   CaptureChannel: Capture channel, should be in range from 0..1
+  RisingEdge: caption rising edge, should be:
+              - ENABLE: Enable rising edge.
+              - DISABLE: Disable this function.
+  FallingEdge:  caption falling edge, should be:
                 - ENABLE: Enable falling edge.
                 - DISABLE: Disable this function.
-	IntOnCaption: Interrupt On caption, should be:
+  IntOnCaption: Interrupt On caption, should be:
                 - ENABLE: Enable interrupt function.
                 - DISABLE: Disable this function.
    ptr: LPC1769 memory address where structure is stored. Use this in place of
@@ -145,11 +145,11 @@ class PWM_CAPTURECFG_Type(cstruct):
 class PWM_COUNTERCFG_Type(cstruct):
   '''Configuration structure in PWM COUNTER mode.
   
-	CounterOption:  Counter Option, should be:
+  CounterOption:  Counter Option, should be:
                   - PWM_COUNTER_RISING: Rising Edge
                   - PWM_COUNTER_FALLING: Falling Edge
                   - PWM_COUNTER_ANY: Both rising and falling mode
-	CountInputSelect: Counter input select, should be:
+  CountInputSelect: Counter input select, should be:
                     - PWM_COUNTER_PCAP1_0: PWM Counter input selected is 
                       PCAP1.0 pin
                     - PWM_COUNTER_PCAP1_1: PWM Counter input selected is 
@@ -173,8 +173,8 @@ class PWM_CHANNEL_EDGE_OPT:
 class PWM_COUNTER_INPUTSEL_OPT:
   '''PWM Input Select in counter mode.
   
- 	PWM_COUNTER_PCAP1_0:  PWM Counter input selected is PCAP1.0 pin
-	PWM_COUNTER_PCAP1_1:  PWM counter input selected is CAP1.1 pin
+   PWM_COUNTER_PCAP1_0:  PWM Counter input selected is PCAP1.0 pin
+  PWM_COUNTER_PCAP1_1:  PWM counter input selected is CAP1.1 pin
    
   '''
   PWM_COUNTER_PCAP1_0 = 0
@@ -202,11 +202,11 @@ def PWM_ConfigStructInit(PWMTimerCounterMode, PWM_InitStruct):
   '''Fills each PWM_InitStruct member with its default value.
   
   If PWMCounterMode = PWM_MODE_TIMER:
-	- PrescaleOption = PWM_TIMER_PRESCALE_USVAL
-	- PrescaleValue = 1
+  - PrescaleOption = PWM_TIMER_PRESCALE_USVAL
+  - PrescaleValue = 1
   If PWMCounterMode = PWM_MODE_COUNTER:
-	- CountInputSelect = PWM_COUNTER_PCAP1_0
-	- CounterOption = PWM_COUNTER_RISING
+  - CountInputSelect = PWM_COUNTER_PCAP1_0
+  - CounterOption = PWM_COUNTER_RISING
   
   PWMTimerCounterMode:  Timer or Counter mode, should be:
                         - PWM_MODE_TIMER: Counter of PWM peripheral is in Timer

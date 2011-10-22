@@ -87,7 +87,7 @@ def GPIO_GetIntStatus(portNum, pinNum, edgeState):
   
   portNum:  Port number to read value, should be: 0 or 2
   pinNum:   Pin number, should be: 0..30 (with port 0) and 0..13 (with port 2)
-  edgeState:  edgeState	state of edge, should be:
+  edgeState:  state of edge, should be:
               0: Rising edge
               1: Falling edge
   return: ENABLE: Interrupt has been generated due to a rising edge on P0.0

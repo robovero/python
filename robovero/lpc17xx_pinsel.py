@@ -129,8 +129,8 @@ class PINSEL_CFG_Type(cstruct):
             from 0 to 3
   Pinmode:  Pin Mode, should be:
             PINSEL_PINMODE_PULLUP: Internal pull-up resistor
-						PINSEL_PINMODE_TRISTATE: Tri-state
-						PINSEL_PINMODE_PULLDOWN: Internal pull-down resistor
+            PINSEL_PINMODE_TRISTATE: Tri-state
+            PINSEL_PINMODE_PULLDOWN: Internal pull-down resistor
   OpenDrain:  OpenDrain mode, should be:
               PINSEL_PINMODE_NORMAL: Pin is in the normal (not open drain) mode
               PINSEL_PINMODE_OPENDRAIN: Pin is in the open drain mode  

@@ -280,12 +280,12 @@ def MCPWM_DCMode(MCPWMx, dcMode, outputInvered, outputPattern):
                   MCOA outputs.
   outputPattern:  A value contains bits that enables/disables the specified 
                   output pins route to the internal MCOA0 signal, should be:
-                  MCPWM_PATENT_A0: 	 MCOA0 tracks internal MCOA0
-                  MCPWM_PATENT_B0: 	 MCOB0 tracks internal MCOA0
-                  MCPWM_PATENT_A1: 	 MCOA1 tracks internal MCOA0
-                  MCPWM_PATENT_B1: 	 MCOB1 tracks internal MCOA0
-                  MCPWM_PATENT_A2: 	 MCOA2 tracks internal MCOA0
-                  MCPWM_PATENT_B2: 	 MCOB2 tracks internal MCOA0
+                  MCPWM_PATENT_A0:    MCOA0 tracks internal MCOA0
+                  MCPWM_PATENT_B0:    MCOB0 tracks internal MCOA0
+                  MCPWM_PATENT_A1:    MCOA1 tracks internal MCOA0
+                  MCPWM_PATENT_B1:    MCOB1 tracks internal MCOA0
+                  MCPWM_PATENT_A2:    MCOA2 tracks internal MCOA0
+                  MCPWM_PATENT_B2:    MCOB2 tracks internal MCOA0
   
   '''
   return robocaller("MCPWM_DCMode", "void", MCPWMx, dcMode, outputInvered, outputPattern)
