@@ -1,5 +1,6 @@
-"""System tick timer client library functions. See LPC17xx CMSIS-Compliant 
-Standard Peripheral Firmware Driver Library documentation.
+"""System tick timer client library functions. Find implementation details in 
+LPC17xx CMSIS-Compliant Standard Peripheral Firmware Driver Library
+documentation.
 """
 
 from internals import robocaller
@@ -12,40 +13,52 @@ __copyright__ =   "Copyright 2011, Gumstix Inc"
 __license__ =     "BSD 2-Clause"
 __version__ =     "0.1"
 
-ST_CTRL_ENABLE = (1<<0)
-ST_CTRL_TICKINT = (1<<1)
-ST_CTRL_CLKSOURCE = (1<<2)
-ST_CTRL_COUNTFLAG = (1<<16)
-
-def ST_RELOAD_RELOAD(n):
-	return (n & 0x00FFFFFF)
-
-def ST_RELOAD_CURRENT(n):
-	return (n & 0x00FFFFFF)
-
-def ST_CALIB_TENMS(n):
-	return (n & 0x00FFFFFF)
-
-ST_CALIB_SKEW = (1<<30)
-ST_CALIB_NOREF = (1<<31)
-CLKSOURCE_EXT = (0)
-CLKSOURCE_CPU = (1)
-
 def SYSTICK_IntCmd(NewState):
+  '''Enable/disable System Tick interrupt.
+  
+  NewState: System Tick interrupt status, should be:
+            - ENABLE
+            - DISABLE
+  
+  '''
 	return robocaller("SYSTICK_IntCmd", "void", NewState)
 
 def SYSTICK_GetCurrentValue():
-	return robocaller("SYSTICK_GetCurrentValue", "uint32_t", )
+  '''Get current value of System Tick counter.
+  
+  return: current value of System Tick counter
+  
+  '''
+	return robocaller("SYSTICK_GetCurrentValue", "uint32_t")
 
 def SYSTICK_ClearCounterFlag():
-	return robocaller("SYSTICK_ClearCounterFlag", "void", )
+  '''Clear Counter flag.
+  '''
+	return robocaller("SYSTICK_ClearCounterFlag", "void")
 
 def SYSTICK_InternalInit(time):
+  '''Initialize System Tick using internal CPU clock source.
+  
+  time: time interval(ms)
+  
+  '''
 	return robocaller("SYSTICK_InternalInit", "void", time)
 
 def SYSTICK_ExternalInit(freq, time):
+  '''Initialize System Tick using external clock source.
+  
+  freq: external clock frequency(Hz)
+  time: time interval(ms)
+  
+  '''
 	return robocaller("SYSTICK_ExternalInit", "void", freq, time)
 
 def SYSTICK_Cmd(NewState):
+  '''Enable/disable System Tick counter.
+  
+  NewState: System Tick counter status, should be:
+            - ENABLE
+            - DISABLE
+  
+  '''
 	return robocaller("SYSTICK_Cmd", "void", NewState)
-
