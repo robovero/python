@@ -1,5 +1,5 @@
-"""Watchdog client library functions. See LPC17xx CMSIS-Compliant
-Standard Peripheral Firmware Driver Library documentation.
+"""Watchdog client library functions. Find implementation details in  LPC17xx
+CMSIS-Compliant Standard Peripheral Firmware Driver Library documentation.
 """
 
 from internals import robocaller
@@ -12,61 +12,81 @@ __copyright__ =   "Copyright 2011, Gumstix Inc"
 __license__ =     "BSD 2-Clause"
 __version__ =     "0.1"
 
-WDT_WDMOD_WDEN = ((1<<0))
-WDT_WDMOD_WDRESET = ((1<<1))
-WDT_WDMOD_WDTOF = ((1<<2))
-WDT_WDMOD_WDINT = ((1<<3))
-
-def WDT_WDMOD(n):
-	return ((1<<1))
-
-WDT_US_INDEX = ((1000000))
-WDT_TIMEOUT_MIN = ((0xFF))
-WDT_TIMEOUT_MAX = ((0xFFFFFFFF))
-WDT_WDMOD_MASK = (0x02)
-WDT_WDTC_MASK = (0xFFFFFFFF)
-WDT_WDFEED_MASK = (0x000000FF)
-WDT_WDCLKSEL_MASK = (0x03)
-WDT_WDCLKSEL_RC = (0x00)
-WDT_WDCLKSEL_PCLK = (0x01)
-WDT_WDCLKSEL_RTC = (0x02)
-
-def PARAM_WDT_CLK_OPT(OPTION):
-	return (
-		(OPTION ==WDT_CLKSRC_IRC)or(OPTION ==WDT_CLKSRC_IRC)
-		or(OPTION ==WDT_CLKSRC_IRC)
-		)
-
-def PARAM_WDT_MODE_OPT(OPTION):
-	return ((OPTION ==WDT_MODE_INT_ONLY)or(OPTION ==WDT_MODE_RESET))
-
 class WDT_MODE_OPT:
-	WDT_MODE_INT_ONLY = 0
-	WDT_MODE_RESET = 1
+  '''WDT operation mode.
+  
+  WDT_MODE_INT_ONLY:  Use WDT to generate interrupt only
+  WDT_MODE_RESET: Use WDT to generate interrupt and reset MCU
+  
+  '''
+  WDT_MODE_INT_ONLY = 0
+  WDT_MODE_RESET = 1
 
 class WDT_CLK_OPT:
-	WDT_CLKSRC_IRC = 0
-	WDT_CLKSRC_PCLK = 1
-	WDT_CLKSRC_RTC = 2
+  '''Clock source option for WDT.
+  
+  WDT_CLKSRC_IRC0:  Clock source from Internal RC oscillator
+  WDT_CLKSRC_PCLK:  Selects the APB peripheral clock (PCLK
+  WDT_CLKSRC_RTC: Selects the RTC oscillator
+   
+  '''
+  WDT_CLKSRC_IRC = 0
+  WDT_CLKSRC_PCLK = 1
+  WDT_CLKSRC_RTC = 2
 
 def WDT_Start(TimeOut):
-	return robocaller("WDT_Start", "void", TimeOut)
+  '''Start WDT activity with given timeout value.
+  
+  TimeOut:  WDT reset after timeout if it is not feed
+  
+  '''
+  return robocaller("WDT_Start", "void", TimeOut)
 
 def WDT_ClrTimeOutFlag():
-	return robocaller("WDT_ClrTimeOutFlag", "void")
+  '''Clear WDT timeout flag.
+  '''
+  return robocaller("WDT_ClrTimeOutFlag", "void")
 
 def WDT_ReadTimeOutFlag():
-	return robocaller("WDT_ReadTimeOutFlag", "FlagStatus")
+  '''Read WDT timeout flag.
+  
+  return: timeout flag status of WDT
+  
+  '''
+  return robocaller("WDT_ReadTimeOutFlag", "FlagStatus")
 
 def WDT_UpdateTimeOut(TimeOut):
-	return robocaller("WDT_UpdateTimeOut", "void", TimeOut)
+  '''Update WDT timeout value and feed.
+  
+  TimeOut:  timeout value to be updated
+  
+  '''
+  return robocaller("WDT_UpdateTimeOut", "void", TimeOut)
 
 def WDT_Init(ClkSrc, WDTMode):
-	return robocaller("WDT_Init", "void", ClkSrc, WDTMode)
+  '''Initialize the Watchdog timer function.
+  
+  ClkSrc: Select clock source, should be:
+          - WDT_CLKSRC_IRC: Clock source from Internal RC oscillator
+          - WDT_CLKSRC_PCLK: Selects the APB peripheral clock (PCLK)
+          - WDT_CLKSRC_RTC: Selects the RTC oscillator
+  WDTMode:  WDT mode, should be:
+            - WDT_MODE_INT_ONLY: Use WDT to generate interrupt only
+            - WDT_MODE_RESET: Use WDT to generate interrupt and reset MCU
+  
+  '''
+  return robocaller("WDT_Init", "void", ClkSrc, WDTMode)
 
 def WDT_Feed():
-	return robocaller("WDT_Feed", "void")
+  '''After setting WDTEN, call this function to start Watchdog or reload the 
+  Watchdog timer.
+  '''
+  return robocaller("WDT_Feed", "void")
 
 def WDT_GetCurrentCount():
-	return robocaller("WDT_GetCurrentCount", "uint32_t")
-
+  '''Get the current value of WDT.
+  
+  return: current value of WDT
+  
+  '''
+  return robocaller("WDT_GetCurrentCount", "uint32_t")
