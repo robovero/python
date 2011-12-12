@@ -91,11 +91,21 @@ compass = I2CDevice(0x1E)
 compass.writeReg(compass_mr_reg, 0)	# continuous measurement mode
 
 # configure the gyro
-# see L3G4200D Application Note for initialization procedure
+# from the L3G4200D Application Note:
+# 1. Write CTRL_REG2
+# 2. Write CTRL_REG3
+# 3. Write CTRL_REG4
+# 4. Write CTRL_REG6
+# 5. Write Reference
+# 6. Write INT1_THS
+# 7. Write INT1_DUR
+# 8. Write INT1_CFG
+# 9. Write CTRL_REG
+# 10. Write CTRL_REG
 gyro = I2CDevice(0x68)
 gyro.writeReg(gyro_ctrl_reg3, 0x08) # enable DRDY
 gyro.writeReg(gyro_ctrl_reg4, 0x80) # enable block data read mode
-gyro.writeReg(gyro_ctrl_reg1, 0x09)	# normal mode, enable x-axis
+gyro.writeReg(gyro_ctrl_reg1, 0x0F)	# normal mode, enable all axes
 
 def twosComplement(low_byte, high_byte):
 	"""Unpack 16-bit twos complement representation of the result.
@@ -118,7 +128,6 @@ while True:
 	]
 	
 	print "g [x, y, z]: ",
-	
 	print [
 		twosComplement(gyro.readReg(gyro_x_low), gyro.readReg(gyro_x_high)),
 		twosComplement(gyro.readReg(gyro_y_low), gyro.readReg(gyro_y_high)),
