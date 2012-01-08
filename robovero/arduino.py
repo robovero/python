@@ -10,6 +10,8 @@ from lpc_types import *    #
 from time import sleep
 import threading
 
+from robovero.internals import getStatus
+
 __author__ =			"Neil MacMunn"
 __email__ =       "neil@gumstix.com"
 __copyright__ =   "Copyright 2010, Gumstix Inc"
@@ -164,19 +166,26 @@ def analogRead(pin):
   
   Assumes that extras.roboveroConfig() has been called to initialize the ADC.
   """
-  global analog_pins
   
   if pin not in analog_pins:
     print "Pin must be one of:"
     for key in analog_pins:
       print key
     exit(1)
-    
-  ADC_StartCmd(LPC_ADC, ADC_START_OPT.ADC_START_NOW)
-  while not ADC_ChannelGetStatus(
-      LPC_ADC, analog_pins[pin].channel, ADC_DATA_STATUS.ADC_DATA_DONE):
+  else:
+    analog_pin = analog_pins[pin]
+
+  start_now = ADC_START_OPT.ADC_START_NOW
+  adc_data_done = ADC_DATA_STATUS.ADC_DATA_DONE
+  enable = FunctionalState.ENABLE
+  
+  ADC_Init(LPC_ADC, 200000)
+  ADC_ChannelCmd(LPC_ADC, analog_pin.channel,  enable)
+  ADC_StartCmd(LPC_ADC, start_now)
+  while not ADC_ChannelGetStatus(LPC_ADC, analog_pin.channel, adc_data_done):
     sleep(0)
-  adc_value = ADC_ChannelGetData(LPC_ADC, analog_pins[pin].channel)
+    
+  adc_value = ADC_ChannelGetData(LPC_ADC, analog_pin.channel)
 
   return adc_value
 

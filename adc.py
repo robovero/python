@@ -1,7 +1,7 @@
 """Acquire and display ADC readings using the Arduino API.
 """
 
-from robovero.arduino import analogRead, AD0_0
+from robovero.arduino import analogRead, AD0_0, AD0_1, AD0_2, AD0_3, AD0_5, AD0_6, AD0_7
 from robovero.extras import roboveroConfig
 from time import sleep
 
@@ -15,11 +15,17 @@ roboveroConfig()
 
 try:
   while True:
-	  print analogRead(AD0_0)
-	  sleep(1)
+    data = [
+      analogRead(AD0_0),
+      analogRead(AD0_1),
+      analogRead(AD0_2),
+      analogRead(AD0_3),
+      analogRead(AD0_5),
+      analogRead(AD0_6),
+      analogRead(AD0_7)
+    ]
+    print data
 
 except KeyboardInterrupt:
-  print ""
-  print "keyboard interrupt: how rude!"
-  exit()
+  exit("\nkeyboard interrupt: how rude!")
   
