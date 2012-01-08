@@ -71,7 +71,7 @@ def robocaller(function, ret_type, *args):
     robovero.serial.write(function)
     if ret_type != "void":
       ret = getReturn()
-      robovero.debug.write("[%f] RESPONSE: %s" % (time.time() - robovero.start_time, ret))
+      robovero.debug.write("[%f] RESPONSE: %s\r\n" % (time.time() - robovero.start_time, ret))
       if " " in ret:
         ret = [int(x, 16) for x in ret.split()]
       else:
