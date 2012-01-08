@@ -113,57 +113,6 @@ def ADC_TRIM(n):
   '''
   return ((n & 0xF) << 8)
 
-def PARAM_ADCx(n):
-  ''' Check ADC parameter.
-  '''
-  return (n == LPC_ADC)
-
-def PARAM_ADC_START_ON_EDGE_OPT(OPT):
-  ''' Check ADC state parameter.
-  '''
-  return ((OPT == ADC_START_ON_RISING) or (OPT == ADC_START_ON_FALLING))
-
-def PARAM_ADC_DATA_STATUS(OPT):
-  ''' Check ADC state parameter.
-  '''
-  return ((OPT== ADC_DATA_BURST) or (OPT== ADC_DATA_DONE))
-
-def PARAM_ADC_RATE(rate):
-  ''' Check ADC rate parameter.
-  '''
-  return ((rate > 0) and (rate <= 200000))
-
-def PARAM_ADC_CHANNEL_SELECTION(SEL):
-  ''' Check ADC channel selection parameter.
-  '''
-  return (
-    (SEL == ADC_CHANNEL_0) or (ADC_CHANNEL_1)
-    or (SEL == ADC_CHANNEL_2) or (ADC_CHANNEL_3)
-    or (SEL == ADC_CHANNEL_4) or (ADC_CHANNEL_5)
-    or (SEL == ADC_CHANNEL_6) or (ADC_CHANNEL_7)
-    )
-
-def PARAM_ADC_START_OPT(OPT):
-  ''' Check ADC start option parameter.
-  '''
-  return (
-    (OPT == ADC_START_CONTINUOUS)or(OPT == ADC_START_NOW)
-    or(OPT == ADC_START_ON_EINT0)or(OPT == ADC_START_ON_CAP01)
-    or(OPT == ADC_START_ON_MAT01)or(OPT == ADC_START_ON_MAT03)
-    or(OPT == ADC_START_ON_MAT10)or(OPT == ADC_START_ON_MAT11)
-    )
-
-def PARAM_ADC_TYPE_INT_OPT(OPT):
-  ''' Check ADC interrupt type parameter.
-  '''
-  return (
-    (OPT == ADC_ADINTEN0) or (OPT == ADC_ADINTEN1)
-    or (OPT == ADC_ADINTEN2) or (OPT == ADC_ADINTEN3)
-    or (OPT == ADC_ADINTEN4) or (OPT == ADC_ADINTEN5)
-    or (OPT == ADC_ADINTEN6) or (OPT == ADC_ADINTEN7)
-    or (OPT == ADC_ADGINTEN)
-    )
-
 class ADC_CHANNEL_SELECTION:
   '''Channel Selection.
   '''
