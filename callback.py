@@ -5,8 +5,8 @@ from robovero.LPC17xx import IRQn_Type
 from robovero.core import NVIC_EnableIRQ
 from robovero.arduino import pinMode, digitalWrite, digitalRead, BTN, LED, OUTPUT
 from robovero.extras import heartbeatOff, registerCallback
-from robovero.lpc17xx_exti import *
-from robovero.lpc17xx_pinsel import *
+from robovero.lpc17xx_exti import EXTI_Init, EXTI_ClearEXTIFlag
+from robovero.lpc17xx_pinsel import PINSEL_CFG_Type, PINSEL_ConfigPin
 from time import sleep
 from random import choice
 
