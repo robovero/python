@@ -3,11 +3,11 @@
 
 import threading, serial, time, atexit, os, sys
 
-__author__ =      "Neil MacMunn"
+__author__ =      ["Neil MacMunn", "Danny Chan"]
 __email__ =       "neil@gumstix.com"
-__copyright__ =   "Copyright 2010, Gumstix Inc."
+__copyright__ =   "Copyright 2012, Gumstix Inc."
 __license__ =     "BSD 2-Clause"
-__version__ =     "0.1"
+__version__ =     "0.2"
 
 def listen():
   """Listen for responses and unsolicited messages (interrupts).
@@ -57,24 +57,22 @@ def isr(IRQn):
 def robocaller(function, ret_type, *args):
   """Serialize a function and it's arguments and send to device.
   """
-  # TODO: get function indices with getIndex to speed up remote function calls
+
   global robovero
   with robovero.lock:
 
     # Check if index is in dictionary, if not, add it to dictionary
     # Debugging log will only contain indices and not the function name
     # Comment out to restore to normal debug log
-    indexedFunction = robovero.indices.get(function)
-    if indexedFunction == None:
-      searchString = "2 " + function + "\r\n"
-      robovero.debug.write("[%f] ADD TO DICTIONARY: %s" % (time.time() - robovero.start_time, searchString))
-      robovero.serial.write(searchString)
-      indicesRet = getReturn()
-      robovero.debug.write("[%f] INDEX: %s\r\n" % (time.time() - robovero.start_time, indicesRet))
-      robovero.indices[function] = indicesRet
-      function = robovero.indices.get(function)
-    else:
-      function = indexedFunction
+    
+    if function not in robovero.indices:
+      search_string = "search " + function + "\r\n"
+      robovero.debug.write("[%f] ADD TO DICTIONARY: %s\r\n" % (time.time() - robovero.start_time, function))
+      robovero.serial.write(search_string)
+      ret = getReturn()
+      robovero.debug.write("[%f] INDEX: %s\r\n" % (time.time() - robovero.start_time, ret))
+      robovero.indices[function] = ret
+    function = robovero.indices[function]
 
     for arg in args:
       if type(arg) == list:
@@ -252,34 +250,8 @@ class Robovero(object):
     self.serial.flush()
     self.serial.close()
 
-  def storeIndex(self):
-    # list entries one by one
-    i = 1
-    string = "3 " + repr(i) + " 1\r\n"
-    self.serial.write(string) #runs list
-    num = self.readline(" ")
-    name = self.readline("\r\n")
-    self.indices[name] = num
-    
-    i = i + 1
-    sendString = "3 " + repr(i) + " 1\r\n"
-    self.serial.write(sendString) #runs list
-    num = self.readline(" ")
-    
-    # robovero returns 001 when listing an entry that doesn't exist
-    while (num != "001"): 
-      name = self.readline("\r\n")
-      self.indices[name] = num
-      
-      i = i + 1
-      sendString = "3 " + repr(i) + " 1\r\n"
-      self.serial.write(sendString) #runs list
-      num = self.readline(" ")
-    
-
 # These functions get called once when a peripheral driver module is 
 # imported. A serial connection to the device is established.
 robovero = Robovero()
-#robovero.storeIndex() # adds all entries to dictionary
 robovero.startListening()
 atexit.register(resetConfig)
