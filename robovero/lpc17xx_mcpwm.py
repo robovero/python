@@ -37,6 +37,30 @@ MCPWM_PATENT_A2 = ((1<<4))
 # MCOB2 tracks internal MCOA0
 MCPWM_PATENT_B2 = ((1<<5))
 
+# Limit interrupt for channel (n)
+def MCPWM_INT_ILIM(n):
+  if ((n>=0)&(n<=2)):
+    return (1<<((n*4)+0))
+  else:
+    return 0
+
+# Match interrupt for channel (n)
+def MCPWM_INT_IMAT(n):
+  if ((n>=0)&(n<=2)):
+    return (1<<((n*4)+1))
+  else:
+    return 0
+
+# Capture interrupt for channel (n)
+def MCPWM_INT_ICAP(n):
+  if ((n>=0)&(n<=2)):
+    return (1<<((n*4)+2))
+  else:
+    return 0
+    
+# Fast abort interrupt
+MCPWM_INT_ABORT = (1<<15)
+
 # Interrupt type in MCPWM
 # Limit interrupt for channel (0)
 MCPWM_INTFLAG_LIM0 = MCPWM_INT_ILIM(0)
