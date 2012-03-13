@@ -2,6 +2,7 @@
 """
 
 import threading, serial, time, atexit, os, sys
+import windows
 
 __author__ =      ["Neil MacMunn", "Danny Chan"]
 __email__ =       "neil@gumstix.com"
@@ -176,16 +177,18 @@ class Robovero(object):
   def __init__(self):
     """Open a serial connection to the robovero hardware.
     """
-    
+
     # look for RoboVeros in /dev
     if (sys.platform.startswith("linux")):
       devices = [dev for dev in os.listdir("/dev/") if "ttyACM" in dev]
     elif (sys.platform == "darwin"):
       devices = [dev for dev in os.listdir("/dev/") if "tty.usbmodem" in dev]
+    elif (sys.platform == "win32"):
+      devices = [portname for portname in windows.enumerateSerialPorts()]
     devices.sort()
     num_devs = len(devices)
     idx = 0
-    
+
     # determine which device to connect to
     if num_devs == 0:
       exit("No RoboVero hardware found.")
@@ -202,10 +205,13 @@ class Robovero(object):
 
     # try to connect
     try:
-      self.serial = serial.Serial('/dev/%s' % devices[idx])
+      if (sys.platform != "win32"):
+        self.serial = serial.Serial('/dev/%s' % devices[idx])
+      else:
+        self.serial = serial.Serial(windows.fullPortName(devices[idx][1]))
     except:
       exit("Couldn't open device.")
-    
+
     self.start_time = time.time()
     self.serial.timeout = 0
     # send line terminator, disable console echo and prompt
@@ -220,7 +226,7 @@ class Robovero(object):
 
     self.response = None
     self.debug = open("run.log", "w")
-    
+
     self.indices = {} # initialize dictionary
 
   def startListening(self):
