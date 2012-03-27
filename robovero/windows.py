@@ -1,4 +1,5 @@
 import sys
+
 if (sys.platform == "win32"):
   import _winreg as winreg
   import itertools, re
@@ -32,6 +33,3 @@ if (sys.platform == "win32"):
               yield (str(val[0]), str(val[1]))
           except EnvironmentError:
             break
-
-else:
-  pass
