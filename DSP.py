@@ -129,3 +129,5 @@ for i in range(50):
   newSpeed = ((vF_dspl_pid(si_Error,pS_Coeff.ptr) + 2**15) % 2**16 - 2**15) #Convert to signed
   print target, current, newSpeed
   current = (newSpeed * -0.05) + current
+  
+exit()
