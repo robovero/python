@@ -17,6 +17,8 @@ __copyright__ =   "Copyright 2012, Gumstix Inc."
 __license__ =     "BSD 2-Clause"
 
 periodValue = 900
+ENABLE = FunctionalState.ENABLE
+DISABLE = FunctionalState.DISABLE
 
 def getMotorSpeed():
   """Get an angle from the user and calculate new duty cycle.
@@ -40,9 +42,9 @@ channelsetup = MCPWM_CHANNEL_CFG_Type()
   
 channelsetup.channelType = MCPWM_CHANNEL_EDGE_MODE
 channelsetup.channelPolarity = MCPWM_CHANNEL_PASSIVE_HI
-channelsetup.channelDeadtimeEnable = FunctionalState.DISABLE
+channelsetup.channelDeadtimeEnable = DISABLE
 channelsetup.channelDeadtimeValue = 0
-channelsetup.channelUpdateEnable = FunctionalState.ENABLE
+channelsetup.channelUpdateEnable = ENABLE
 channelsetup.channelTimercounterValue = 0
 channelsetup.channelPeriodValue = periodValue
 channelsetup.channelPulsewidthValue = 0
@@ -50,17 +52,18 @@ channelsetup.channelPulsewidthValue = 0
 MCPWM_ConfigChannel(LPC_MCPWM, 0, channelsetup.ptr)
 
 # Disable DC Mode
-MCPWM_DCMode(LPC_MCPWM, FunctionalState.DISABLE, FunctionalState.ENABLE, (0))
+MCPWM_DCMode(LPC_MCPWM, DISABLE, ENABLE, (0))
 
 # Disable AC Mode
-MCPWM_ACMode(LPC_MCPWM, FunctionalState.DISABLE)
+MCPWM_ACMode(LPC_MCPWM, DISABLE)
 
-MCPWM_Start(LPC_MCPWM, FunctionalState.ENABLE, FunctionalState.DISABLE, FunctionalState.DISABLE)
+MCPWM_Start(LPC_MCPWM, ENABLE, DISABLE, DISABLE)
 
 try:
   while True:
     channelsetup.channelPulsewidthValue = getMotorSpeed()
     MCPWM_WriteToShadow(LPC_MCPWM, 0, channelsetup.ptr)
 except:
-  MCPWM_Stop(LPC_MCPWM, FunctionalState.ENABLE, FunctionalState.DISABLE, FunctionalState.DISABLE)
+  MCPWM_Stop(LPC_MCPWM, ENABLE, DISABLE, DISABLE)
   print "you broke it"
+
