@@ -1,5 +1,4 @@
-"""ADC client library functions. Find implementation details in LPC17xx 
-CMSIS-Compliant Standard Peripheral Firmware Driver Library documentation.
+"""
 """
 
 from internals import robocaller, cstruct
@@ -13,8 +12,7 @@ __license__ =     "BSD 2-Clause"
 __version__ =     "0.1"
 
 class tS_ResonatorStateCoeff(cstruct):
-  '''pikachu
-  
+  '''  
   '''
   pass
   
@@ -24,13 +22,12 @@ def vF_dspl_resonator(psi_Output, pS_ResonatorStateCoeff, i_NSamples):
   return robocaller("vF_dspl_resonator", "void", psi_Output, pS_ResonatorStateCoeff, i_NSamples)
 
 class tS_blockfir32_Coeff(cstruct):
-  '''pikachu
-  
+  '''  
   '''
   pass
   
 def vF_dspl_blockfir32(pi_y, pi_x, pS_Coeff, i_nsamples):
-  '''nanana
+  '''
   '''
   return robocaller("vF_dspl_blockfir32", "void", pi_y, pi_x, pS_Coeff, i_nsamples)
 
