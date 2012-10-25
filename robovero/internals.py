@@ -20,10 +20,8 @@ def listen():
           
     if message == "":
       robovero.debug.write("[%f] INTERRUPT: " % (time.time() - robovero.start_time))
-      robovero.serial.timeout = None
       IRQn = int(robovero.readline("\r\n"), 16)
       robovero.debug.write("%x\r\n" % IRQn)
-      robovero.serial.timeout = 0
       isrthread = threading.Thread(target=isr, args=[IRQn], name="isr")
       isrthread.start()
       
@@ -213,7 +211,7 @@ class Robovero(object):
       exit("Couldn't open device.")
 
     self.start_time = time.time()
-    self.serial.timeout = 0
+    self.serial.timeout = None
     # send line terminator, disable console echo and prompt
     self.serial.write("\r\n")
     self.serial.write("promptOff\r\n")
