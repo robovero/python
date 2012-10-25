@@ -3,6 +3,7 @@
 
 from robovero.lpc17xx_pinsel import PINSEL_CFG_Type, PINSEL_ConfigPin
 from robovero.internals import deref
+import time
 
 __author__ =      "Neil MacMunn"
 __email__ =       "neil@gumstix.com"
@@ -41,4 +42,4 @@ deref(clkoutcfg_reg, 4, clkoutcfg_val)
 print "You should now see a %.2fMHz square wave on P1_27" % (120.0/float(clkout_sel))
 
 while True:
-  pass
+  time.sleep(1)
