@@ -2,6 +2,7 @@
 """
 
 import threading, serial, time, atexit, os, sys
+import Queue
 import windows
 
 __author__ =      ["Neil MacMunn", "Danny Chan"]
@@ -20,25 +21,19 @@ def listen():
           
     if message == "":
       robovero.debug.write("[%f] INTERRUPT: " % (time.time() - robovero.start_time))
-      robovero.serial.timeout = None
       IRQn = int(robovero.readline("\r\n"), 16)
       robovero.debug.write("%x\r\n" % IRQn)
-      robovero.serial.timeout = 0
       isrthread = threading.Thread(target=isr, args=[IRQn], name="isr")
       isrthread.start()
       
     else:
-      robovero.response = message
+      robovero.response.put(message)
 
 def getReturn():
   """Get a return value that the listening thread has received.
   """
   global robovero
-  while robovero.response == None:
-    time.sleep(0)
-  ret = robovero.response
-  robovero.response = None
-  return ret
+  return robovero.response.get()
 
 isr_list = {}
 
@@ -213,7 +208,7 @@ class Robovero(object):
       exit("Couldn't open device.")
 
     self.start_time = time.time()
-    self.serial.timeout = 0
+    self.serial.timeout = None
     # send line terminator, disable console echo and prompt
     self.serial.write("\r\n")
     self.serial.write("promptOff\r\n")
@@ -224,7 +219,7 @@ class Robovero(object):
     #  a lock for handling incoming serial data
     self.lock = threading.RLock()
 
-    self.response = None
+    self.response = Queue.Queue()
     self.debug = open("run.log", "w")
 
     self.indices = {} # initialize dictionary

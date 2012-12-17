@@ -55,5 +55,5 @@ NVIC_EnableIRQ(IRQn_Type.EINT0_IRQn)
 
 # the callback does everything from here
 while True:
-	pass
+	sleep(1)
 
