@@ -144,7 +144,7 @@ def QEI_DeInit(QEIx):
   QEIx: QEI peripheral, should be LPC_QEI
   
   '''
- return robocaller("QEI_DeInit", "void", QEIx)
+  return robocaller("QEI_DeInit", "void", QEIx)
 
 def QEI_GetPosition(QEIx):
   '''Get current position value in QEI peripheral.
@@ -187,7 +187,7 @@ def QEI_SetMaxPosition(QEIx, ulMaxPos):
   ulMaxPos: Max position value to set
   
   '''
- return robocaller("QEI_SetMaxPosition", "void", QEIx, ulMaxPos)
+  return robocaller("QEI_SetMaxPosition", "void", QEIx, ulMaxPos)
 
 def QEI_GetVelocity(QEIx):
   '''Get current velocity pulse counter in current time period.
@@ -281,7 +281,7 @@ def QEI_SetTimerReload(QEIx, QEIReloadStruct):
   QEIReloadStruct: QEI reload structure
   
   '''
- return robocaller("QEI_SetTimerReload", "void", QEIx, QEIReloadStruct)
+  return robocaller("QEI_SetTimerReload", "void", QEIx, QEIReloadStruct)
 
 def QEI_ConfigStructInit(QIE_InitStruct):
   '''Fills each QIE_InitStruct member with its default value.
