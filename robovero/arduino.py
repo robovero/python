@@ -39,6 +39,7 @@ values =     {LOW:0, HIGH:1}
 P0_4 =      "P0_4"
 P0_5 =      "P0_5"
 P0_19 =      "P0_19"
+P1_0 =       "P1_0"
 P1_27 =      "P1_27"
 P3_25 =      "P3_25"
 P2_10 =      "P2_10"
@@ -63,6 +64,7 @@ digital_pins = {
   P0_4:DigitalPin(0,4),
   P0_5:DigitalPin(0,5),
   P0_19:DigitalPin(0,19),
+  P1_0:DigitalPin(1,0),
   P1_27:DigitalPin(1,27),
   P3_25:DigitalPin(3,25),
   P2_10:DigitalPin(2,10),
@@ -82,19 +84,19 @@ def pinMode(pin, mode):
   """Configures the specified pin to behave either as an input or an output.
   """
   global digital_pins, modes
-  
+
   if pin not in digital_pins:
     print "Pin must be one of:"
     for key in digital_pins:
       print key
     exit(1)
-    
+
   if mode not in modes:
     print "Mode must be one of:",
     for key in modes:
       print key,
     exit(1)
-  
+
   GPIO_SetDir(digital_pins[pin].portnum, (1 << digital_pins[pin].pinnum),
       modes[mode]);
 
@@ -103,20 +105,20 @@ def digitalWrite(pin, value):
   """Write a HIGH or a LOW value to a digital pin.
   """
   global digital_pins, values
-  
+
   if pin not in digital_pins:
     print "Pin must be one of:"
     for key in digital_pins:
       print key
     exit(1)
-  
+
   if value in values.keys():
     value = values[value]
   elif value not in values.values():
     print "Value must be one of:", values.items()
     exit(1)
-  
-  if value:  
+
+  if value:
     GPIO_SetValue(digital_pins[pin].portnum, (1 << digital_pins[pin].pinnum))
   else:
     GPIO_ClearValue(digital_pins[pin].portnum, (1 << digital_pins[pin].pinnum))
@@ -126,13 +128,13 @@ def digitalRead(pin):
   """Reads the value from a specified digital pin, either HIGH or LOW.
   """
   global digital_pins
-  
+
   if pin not in digital_pins:
     print "Pin must be one of:"
     for key in digital_pins:
       print key
     exit(1)
-  
+
   if (GPIO_ReadValue(digital_pins[pin].portnum) & (1 << digital_pins[pin].pinnum)):
     return 1
   else:
@@ -155,7 +157,7 @@ class AnalogPin(object):
   def __init__(self, channel, interrupt):
     self.channel = channel
     self.interrupt = interrupt
-    
+
 analog_pins = {
   AD0_0:AnalogPin(ADC_CHANNEL_SELECTION.ADC_CHANNEL_0, ADC_TYPE_INT_OPT.ADC_ADINTEN0),
   AD0_1:AnalogPin(ADC_CHANNEL_SELECTION.ADC_CHANNEL_1, ADC_TYPE_INT_OPT.ADC_ADINTEN1),
@@ -167,11 +169,11 @@ analog_pins = {
 }
 
 def analogRead(pin):
-  """Reads the value from the specified analog pin. 
-  
+  """Reads the value from the specified analog pin.
+
   Assumes that extras.roboveroConfig() has been called to initialize the ADC.
   """
-  
+
   if pin not in analog_pins:
     print "Pin must be one of:"
     for key in analog_pins:
@@ -183,18 +185,18 @@ def analogRead(pin):
   start_now = ADC_START_OPT.ADC_START_NOW
   adc_data_done = ADC_DATA_STATUS.ADC_DATA_DONE
   enable = FunctionalState.ENABLE
-  
+
   ADC_Init(LPC_ADC, 200000)
   ADC_ChannelCmd(LPC_ADC, analog_pin.channel,  enable)
   ADC_StartCmd(LPC_ADC, start_now)
   while not ADC_ChannelGetStatus(LPC_ADC, analog_pin.channel, adc_data_done):
     sleep(0)
-    
+
   adc_value = ADC_ChannelGetData(LPC_ADC, analog_pin.channel)
 
   return adc_value
 
-    
+
 PWM1 = "PWM1"
 PWM2 = "PWM2"
 PWM3 = "PWM3"
@@ -215,12 +217,12 @@ def analogWrite(pin, value):
   """Writes an analog value (PWM wave) to a pin.
   """
   global pwm_pins
-  
+
   if pin not in pwm_pins:
     print "Pin must be one of:"
     for key in pwm_pins:
       print key
-    exit(1)  
+    exit(1)
 
   if value < 0 or value > 255:
     print "Invalid duty cycle"
@@ -235,8 +237,8 @@ def analogWrite(pin, value):
   PWM_ChannelCmd(LPC_PWM1, pwm_pins[pin], FunctionalState.ENABLE)
   PWM_ResetCounter(LPC_PWM1)
   PWM_CounterCmd(LPC_PWM1, FunctionalState.ENABLE)
-  PWM_Cmd(LPC_PWM1, FunctionalState.ENABLE)  
-  
+  PWM_Cmd(LPC_PWM1, FunctionalState.ENABLE)
+
 
 ################################################################################
 # Advanced I/O
@@ -246,12 +248,12 @@ def tone(pin, frequency, duration=None):
   """Generates a square wave of the specified frequency on pin.
   """
   global pwm_pins
-  
+
   if pin not in pwm_pins:
     print "Pin must be one of:"
     for key in pwm_pins:
       print key
-    exit(1)  
+    exit(1)
 
   if frequency < 1 or frequency > 500000:
     print "Invalid frequency"
@@ -259,12 +261,12 @@ def tone(pin, frequency, duration=None):
 
   initMatch(0, 1000000/frequency)
   initMatch(pwm_pins[pin], 500000/frequency)
-  
+
   PWM_ChannelCmd(LPC_PWM1, pwm_pins[pin], FunctionalState.ENABLE)
   PWM_ResetCounter(LPC_PWM1)
   PWM_CounterCmd(LPC_PWM1, FunctionalState.ENABLE)
   PWM_Cmd(LPC_PWM1, FunctionalState.ENABLE)
-  
+
   if duration:
     t = threading.Timer(float(duration)/1000.0, noTone, [pin])
     t.start()
@@ -273,11 +275,11 @@ def noTone(pin):
   """Stops the generation of a square wave on pin.
   """
   global pwm_pins
-  
+
   if pin not in pwm_pins:
     print "Pin must be one of:"
     for key in pwm_pins:
       print key
     exit(1)
-    
+
   PWM_ChannelCmd(LPC_PWM1, pwm_pins[pin], FunctionalState.DISABLE)
