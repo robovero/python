@@ -16,17 +16,17 @@ class Array(object):
     self.length = length
     self.size = size
     self.ptr = malloc(size * length)
-    
+
     # assign the same value to all items
     if type(values) == int:
       for i in range(length):
         self[i] = values
-    
+
     # copy a list of values
     elif type(values) == list:
       for i in range(min(length, len(values))):
         self[i] = values[i]
-        
+
     # convert a string to a list of characters and copy
     elif type(values) == str:
       values = list(values)
@@ -44,7 +44,7 @@ class Array(object):
     if type(value) != int:
       raise TypeError
     robocaller("deref", "void", self.ptr + self.size*key, self.size, value)
-    
+
   def __del__(self):
     free(self.ptr)
 
@@ -53,12 +53,12 @@ def roboveroConfig():
   on the RoboVero board.
   """
   return robocaller("roboveroConfig", "void")
-  
+
 def heartbeatOn():
   """Flash the onboard LED.
   """
   return robocaller("heartbeatOn", "void")
-  
+
 def heartbeatOff():
   """Let user control the onboard LED.
   """
@@ -68,10 +68,26 @@ def initMatch(ch, count):
   """Initialize a PWM match condition.
   """
   return robocaller("initMatch", "void", ch, count)
-  
+
 def registerCallback(IRQn, function):
   """Register a RoboVero interrupt service routine.
-  
+
   Pass the IRQ number and function to call when an interrupt occurs.
   """
   isr_list[IRQn] = function
+
+from robovero.arduino import pinMode, digitalWrite, P1_0, OUTPUT
+def IMUInit():
+  """ Enable IMU by pulling IMU_EN low
+  """
+  pinMode(P1_0, OUTPUT)
+  digitalWrite(P1_0, 0)
+
+def IMUReset():
+  """ Reset IMU by pulling IMU_EN high and then low
+  """
+  pinMode(P1_0, OUTPUT)
+  digitalWrite(P1_0, 1)
+  digitalWrite(P1_0, 0)
+
+
